@@ -1,6 +1,6 @@
 #include "World.h"
 
-GameObject World::makeCube(Vector3d position)
+Object3d World::makeCube(Vector3d position)
 {
 	std::vector<Vector3d> vertexes = std::vector<Vector3d>();
 	vertexes.push_back(Vector3d(0.0, 0.0, 0.0));
@@ -70,16 +70,16 @@ GameObject World::makeCube(Vector3d position)
 
 	Mesh cubeMesh = Mesh(vertexes, triangles);
 
-	GameObject gameobject = GameObject();
-	gameobject.setMesh(cubeMesh);
-	gameobject.move(position);
+	Object3d object3d = Object3d();
+	object3d.setMesh(cubeMesh);
+	object3d.move(position);
 
-	return gameobject;
+	return object3d;
 }
 
 World::World()
 {
-	worldObjects = std::vector<GameObject>();
+	worldObjects = std::vector<Object3d>();
 }
 
 World::~World()

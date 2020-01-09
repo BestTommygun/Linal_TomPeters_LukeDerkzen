@@ -1,15 +1,15 @@
 #pragma once
 #include <vector>
 #include "Camera.h"
-#include "GameObject.h"
+#include "Object3d.h"
 
 class World
 {
 protected:
-	std::vector<GameObject> worldObjects;
+	std::vector<Object3d> worldObjects;
 	Camera* camera;
 
-	GameObject makeCube(Vector3d position);
+	Object3d makeCube(Vector3d position);
 public:
 	World();
 	~World();
@@ -17,7 +17,7 @@ public:
 	void prepareWorld();
 	void moveCamera(Vector3d movement);
 
-	std::vector<GameObject> getWorldObjects() {
+	std::vector<Object3d> getWorldObjects() {
 		return worldObjects;
 	}
 };

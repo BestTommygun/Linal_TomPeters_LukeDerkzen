@@ -152,9 +152,10 @@
     <ClCompile Include="Data\Transform.cpp" />
     <ClCompile Include="Data\Vector2d.cpp" />
     <ClCompile Include="Data\Vector3d.cpp" />
-    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Object3d.cpp" />
     <ClCompile Include="Linal.calculation.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Util\Math.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -164,8 +165,9 @@
     <ClInclude Include="Data\Transform.hpp" />
     <ClInclude Include="Data\Vector2d.h" />
     <ClInclude Include="Data\Vector3d.h" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Object3d.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Util\Math.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
