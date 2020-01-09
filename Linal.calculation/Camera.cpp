@@ -15,3 +15,16 @@ Camera::Camera(Vector3d cameraPos, double fov, double near, double far) :
 	);
 	this->cameraPos = camMatrix * cameraPos;
 }
+
+void Camera::setCameraPos()
+{
+}
+
+Matrix3d& Camera::getCameraPos()
+{
+	return cameraPos;
+}
+
+void Camera::moveCamera(Vector3d movement)
+{
+}
