@@ -30,7 +30,9 @@ void WorldThread::run() {
 			updateWorld(deltaTime);
 
 			//gib render
-			
+			System::Collections::Generic::List<RenderLine>^ test2 = meshToLines();
+			mainView->ToDrawLines = test2;
+			//mainView->lines = renderer.render(world.getWorldObjects());
 		}
 		catch(std::exception e) {
 			_isRunning = false;
@@ -77,3 +79,22 @@ void WorldThread::handleInputs(System::Char input)
 	}
 }
 
+System::Collections::Generic::List<RenderLine>^ WorldThread::meshToLines()
+{
+	//TEST CODE
+	//build mesh vector
+	auto curObject = world->getWorldObjects()[0];
+	std::vector<size_t> triangles = curObject.getMesh().getTriangleAt(0);
+
+	System::Collections::Generic::List<RenderLine>^ returnLines = gcnew System::Collections::Generic::List<RenderLine>();
+
+	//drawing of triangle lines
+	System::Drawing::PointF point1 = System::Drawing::PointF(curObject.getMesh().vertexes->at(triangles[0]).x, curObject.getMesh().vertexes->at(triangles[0]).y);
+	System::Drawing::PointF point2 = System::Drawing::PointF(curObject.getMesh().vertexes->at(triangles[1]).x, curObject.getMesh().vertexes->at(triangles[1]).y);
+	System::Drawing::PointF point3 = System::Drawing::PointF(curObject.getMesh().vertexes->at(triangles[2]).x, curObject.getMesh().vertexes->at(triangles[2]).y);
+	returnLines->Add(RenderLine(point1, point2));
+	returnLines->Add(RenderLine(point1, point3));
+	returnLines->Add(RenderLine(point2, point3));
+
+	return returnLines;
+}

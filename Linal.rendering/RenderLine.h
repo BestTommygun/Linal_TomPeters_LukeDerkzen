@@ -10,5 +10,7 @@ public:
 		point1{ point1 },
 		point2{ point2 }
 	{}
+
+	System::Tuple<System::Drawing::PointF, System::Drawing::PointF>^ getPoints();
 };
 

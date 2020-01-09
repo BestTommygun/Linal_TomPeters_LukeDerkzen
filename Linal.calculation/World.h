@@ -9,7 +9,7 @@ protected:
 	std::vector<GameObject> worldObjects;
 	Camera* camera;
 
-	GameObject& makeCube(Vector3d position);
+	GameObject makeCube(Vector3d position);
 public:
 	World();
 	~World();
@@ -17,7 +17,7 @@ public:
 	void prepareWorld();
 	void moveCamera(Vector3d movement);
 
-	const std::vector<GameObject>& getWorldObjects() {
+	std::vector<GameObject> getWorldObjects() {
 		return worldObjects;
 	}
 };

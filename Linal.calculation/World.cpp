@@ -1,6 +1,6 @@
 #include "World.h"
 
-GameObject& World::makeCube(Vector3d position)
+GameObject World::makeCube(Vector3d position)
 {
 	std::vector<Vector3d> vertexes = std::vector<Vector3d>();
 	vertexes.push_back(Vector3d(0.0, 0.0, 0.0));

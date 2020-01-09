@@ -95,22 +95,24 @@ Mesh& Mesh::operator=(Mesh&& toMove) noexcept
 	}
 	return *this;
 }
-/*
-size_t Mesh::getVertexSize()
-{
-	return vertexesSize;
-}
 
-Vector3d& Mesh::getVertexAt(size_t index) noexcept
-{
-	if (index > vertexesSize) {
-		std::cout << "index out of range at mesh line 109";
-		exit(0);
-	}
-	return vertexes->at(index);
-}
-*/
 size_t Mesh::getTrianglesSize()
 {
 	return trianglesSize;
+}
+
+std::vector<size_t> Mesh::getTriangleAt(size_t index)
+{
+	if (index < trianglesSize - 3) {
+		//if(index % 3 == 0)
+		std::vector<size_t> returnTriangles = std::vector<size_t>();
+
+		size_t i = index;
+		while (i < index + 3) {
+			returnTriangles.push_back(triangles[i]);
+			i++;
+		}
+		return returnTriangles;
+	}
+	throw std::exception("index out of range at Mesh::getTriangleAt()");
 }

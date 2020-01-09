@@ -8,6 +8,8 @@ protected:
 	View^ mainView;
 	World* world;
 
+	/// <summary> converts the mesh of an object to a list of RenderLine objects, it does this using the triangles variable </summary>
+	System::Collections::Generic::List<RenderLine>^ meshToLines();
 public:
 	WorldThread() {};
 	WorldThread(View^ mainView);

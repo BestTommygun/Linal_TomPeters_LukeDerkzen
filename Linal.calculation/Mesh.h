@@ -26,5 +26,6 @@ public:
     Mesh& operator=(Mesh&& toMove) noexcept;
 
     size_t getTrianglesSize();
+    std::vector<size_t> getTriangleAt(size_t index);
 
 };
