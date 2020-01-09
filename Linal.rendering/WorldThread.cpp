@@ -5,6 +5,7 @@
 WorldThread::WorldThread(View^ mainView)
 {
 	world = new World();
+	world->prepareWorld();
 	this->mainView = mainView;
 }
 
@@ -41,6 +42,13 @@ void WorldThread::run() {
 
 void WorldThread::updateWorld(System::TimeSpan deltaTime)
 {
+	size_t worldObjectSize = world->getWorldObjects().size();
+	if (worldObjectSize > 0) {
+		std::cout << "world contains ";
+		std::cout << worldObjectSize;
+		std::cout << " objects\n";
+	}
+	else
 	std::cout << "world is empty" << '\n';
 }
 
@@ -60,6 +68,9 @@ void WorldThread::handleInputs(System::Char input)
 		break;
 	case 'd':
 		world->moveCamera(Vector3d(1, 0, 0));
+		break;
+	case 't':
+		std::cout << "this should enable debug mode which shows us the axis of everything\n";
 		break;
 	default:
 		break;

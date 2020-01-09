@@ -1,5 +1,82 @@
 #include "World.h"
 
+GameObject& World::makeCube(Vector3d position)
+{
+	std::vector<Vector3d> vertexes = std::vector<Vector3d>();
+	vertexes.push_back(Vector3d(0.0, 0.0, 0.0));
+	vertexes.push_back(Vector3d(1.0, 0.0, 0.0));
+	vertexes.push_back(Vector3d(0.0, 1.0, 0.0));
+	vertexes.push_back(Vector3d(1.0, 1.0, 0.0));
+
+	vertexes.push_back(Vector3d(0.0, 0.0, 1.0));
+	vertexes.push_back(Vector3d(1.0, 0.0, 1.0));
+	vertexes.push_back(Vector3d(0.0, 1.0, 1.0));
+	vertexes.push_back(Vector3d(1.0, 1.0, 1.0));
+
+	std::vector<size_t> triangles = std::vector<size_t>();
+	//front side
+	triangles.push_back(0);
+	triangles.push_back(1);
+	triangles.push_back(2);
+
+	triangles.push_back(1);
+	triangles.push_back(2);
+	triangles.push_back(3);
+
+	//left side
+	triangles.push_back(0);
+	triangles.push_back(4);
+	triangles.push_back(2);
+
+	triangles.push_back(2);
+	triangles.push_back(6);
+	triangles.push_back(4);
+
+	//top side
+	triangles.push_back(2);
+	triangles.push_back(3);
+	triangles.push_back(6);
+
+	triangles.push_back(6);
+	triangles.push_back(3);
+	triangles.push_back(7);
+
+	//bottom side
+	triangles.push_back(0);
+	triangles.push_back(1);
+	triangles.push_back(4);
+
+	triangles.push_back(1);
+	triangles.push_back(4);
+	triangles.push_back(5);
+
+	//right side
+	triangles.push_back(1);
+	triangles.push_back(3);
+	triangles.push_back(5);
+
+	triangles.push_back(1);
+	triangles.push_back(5);
+	triangles.push_back(7);
+
+	//back side
+	triangles.push_back(4);
+	triangles.push_back(5);
+	triangles.push_back(6);
+
+	triangles.push_back(5);
+	triangles.push_back(6);
+	triangles.push_back(7);
+
+	Mesh cubeMesh = Mesh(vertexes, triangles);
+
+	GameObject gameobject = GameObject();
+	gameobject.setMesh(cubeMesh);
+	gameobject.move(position);
+
+	return gameobject;
+}
+
 World::World()
 {
 	worldObjects = std::vector<GameObject>();
@@ -14,6 +91,10 @@ void World::prepareWorld()
 {
 	//make objects here
 	camera = new Camera(Vector3d(0, 0, 0), 90, 10, 100);
+
+	worldObjects.push_back(makeCube(Vector3d(10, 0, 10)));
+	worldObjects.push_back(makeCube(Vector3d(0, 0, 5)));
+	worldObjects.push_back(makeCube(Vector3d(-10, 0, 2)));
 }
 
 void World::moveCamera(Vector3d movement)
