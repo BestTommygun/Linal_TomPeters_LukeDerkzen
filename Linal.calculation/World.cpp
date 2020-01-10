@@ -90,9 +90,9 @@ World::~World()
 void World::prepareWorld()
 {
 	//make objects here
-	camera = new Camera(Vector3d(0, 0, 0), 90, 10, 100);
+	camera = new Camera(Vector3d(0, 0, 0), 120, 1, 100);
 
-	worldObjects.push_back(makeCube(Vector3d(10, 0, 10)));
+	worldObjects.push_back(makeCube(Vector3d(0, 0, 10)));
 	worldObjects.push_back(makeCube(Vector3d(0, 0, 5)));
 	worldObjects.push_back(makeCube(Vector3d(-10, 0, 2)));
 }
@@ -100,4 +100,8 @@ void World::prepareWorld()
 void World::moveCamera(Vector3d movement)
 {
 	camera->moveCamera(movement);
+}
+
+Camera& World::getCamera() const {
+	return *camera;
 }

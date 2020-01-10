@@ -3,7 +3,7 @@
 #include "Vector2d.h"
 #include "../Util/Math.h"
 
-//struct Matrix3d;
+struct Matrix3d;
 struct Vector3d
 {
 	static const Vector3d zero;
@@ -28,7 +28,7 @@ struct Vector3d
 	void operator-=(const Vector3d& other);
 	Vector3d operator*(const Vector3d& other) const;
 	void operator*=(const Vector3d& other);
-	//Vector3d operator*(const Matrix3d& matrix) const;
+	Vector3d operator*(const Matrix3d& matrix) const;
 	Vector3d operator*(const double& other) const;
 	void operator*=(const double& other);
 	Vector3d operator/(const Vector3d& other) const;
@@ -36,4 +36,4 @@ struct Vector3d
 	explicit operator Vector2d();
 };
 
-//#include "Matrix3d.hpp"
+#include "Matrix3d.h"

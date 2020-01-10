@@ -1,30 +1,39 @@
 #include "Camera.h"
 
 Camera::Camera(Vector3d cameraPos, double fov, double near, double far) : 
-	fov{ fov }
+	fov{ fov },
+	near{ near },
+	far{ far }
 {
-	double scale = near * std::tan(fov * 0.5);
-	double m33 = -far/(far - near);
-	double m34 = (-far * near) / (far - near);
-
-	Matrix3d camMatrix = Matrix3d(
-		scale, 0,     0,   0,
-		0,	   scale, 0,   0,
-		0,	   0,     m33, -1,
-		0,	   0,     m34, 0
-	);
-	this->cameraPos = camMatrix * cameraPos;
+	this->cameraMatrix = Matrix3d(cameraPos);
 }
 
-void Camera::setCameraPos()
+const double Camera::getNear() const
 {
+	return near;
 }
 
-Matrix3d& Camera::getCameraPos()
+const double Camera::getFar() const
 {
-	return cameraPos;
+	return far;
+}
+
+const double Camera::getFov() const
+{
+	return fov;
+}
+
+void Camera::setCameraPos(Vector3d newPosition)
+{
+	this->cameraMatrix = Matrix3d(newPosition);
+}
+
+Matrix3d& Camera::getMatrix()
+{
+	return cameraMatrix;
 }
 
 void Camera::moveCamera(Vector3d movement)
 {
+	this->cameraMatrix = this->cameraMatrix *  Matrix3d(movement);
 }

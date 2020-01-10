@@ -25,6 +25,12 @@
     <Filter Include="Header Files\util">
       <UniqueIdentifier>{16a7681c-8e85-40e7-85ad-84d64cd4a89a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\behaviours">
+      <UniqueIdentifier>{5a0d1b0f-17d5-4618-95c7-d8f44e667e7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\behaviours">
+      <UniqueIdentifier>{692cbea8-cb16-4b16-a00f-bd148a3d7a5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Linal.calculation.cpp">
@@ -54,11 +60,14 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Object3d.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviours\BaseBehaviour.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviours\PulseBehaviour.cpp">
+      <Filter>Source Files\behaviours</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,11 +95,14 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Object3d.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviours\BaseBehaviour.h">
+      <Filter>Header Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviours\PulseBehaviour.h">
+      <Filter>Header Files\behaviours</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

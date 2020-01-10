@@ -9,9 +9,10 @@ protected:
 
 	void OnPaint(System::Windows::Forms::PaintEventArgs^ e) override;
 	void KeyPressEventHandler(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+
 public:
 	View();
-
+	
 	property System::Collections::Generic::Queue<System::Char>^ KeysPressed {
 		System::Collections::Generic::Queue<System::Char>^ get() {
 			return _keysPressed;

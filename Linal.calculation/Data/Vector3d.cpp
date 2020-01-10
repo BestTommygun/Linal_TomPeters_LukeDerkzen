@@ -102,12 +102,12 @@ void Vector3d::operator*=(const Vector3d& other)
 	this->y *= other.y;
 	this->z *= other.z;
 }
-/*
+
 Vector3d Vector3d::operator*(const Matrix3d& matrix) const
 {
 	return matrix * *this;
 }
-*/
+
 Vector3d Vector3d::operator*(const double& factor) const
 {
 	return Vector3d(

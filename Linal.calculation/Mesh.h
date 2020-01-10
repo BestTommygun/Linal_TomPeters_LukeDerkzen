@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "Data/Vector3d.h";
+#include "Data/Vector3d.h"
 
 class Mesh
 {
@@ -13,9 +13,6 @@ private:
 	size_t trianglesSize;
 
 public:    
-
-    std::vector<Vector3d>* vertexes;
-
     Mesh();
     Mesh(const std::vector<Vector3d>& vertexes, const std::vector<size_t>& triangles);
     Mesh(const Mesh& toCopy) noexcept;
@@ -25,7 +22,8 @@ public:
     Mesh& operator=(const Mesh& toCopy) noexcept;
     Mesh& operator=(Mesh&& toMove) noexcept;
 
-    size_t getTrianglesSize();
-    std::vector<size_t> getTriangleAt(size_t index);
+    std::vector<Vector3d> vertexes;
 
+    size_t getTrianglesSize() const;
+    const size_t* getTriangles() const;
 };

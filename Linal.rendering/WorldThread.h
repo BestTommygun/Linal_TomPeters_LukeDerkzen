@@ -1,24 +1,14 @@
 #pragma once
 #include "View.h"
 #include "../Linal.calculation/World.h"
+#include "Renderer.h"
 
 public ref class WorldThread
 {
 protected:
 	View^ mainView;
 	World* world;
-
-	/// <summary> 
-	/// converts the mesh of an object to a list of RenderLine objects,
-	// it does this using the triangles variable 
-	// !! this only CONVERTS the two, this method does NOT calculate anything !!
-	// </summary>
-	System::Collections::Generic::List<RenderLine>^ meshToLines(Mesh mesh);
-
-	/// <summary>
-	/// calls meshToLines() to convert all worldObjects to RenderLines
-	/// </summary>
-	System::Collections::Generic::List<RenderLine>^ worldObjectsToLines();
+	Renderer* renderer;
 public:
 	WorldThread() {};
 	WorldThread(View^ mainView);

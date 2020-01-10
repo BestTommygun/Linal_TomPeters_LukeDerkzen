@@ -5,15 +5,18 @@
 class Camera
 {
 protected:
-	Matrix3d cameraPos;
-	double fov;
+	Matrix3d cameraMatrix;
+	double fov, near, far;
 
 public:
 	Camera() : Camera(Vector3d(0, 0, 0), 90, 20, 200) {};
 	Camera(Vector3d cameraPos, double fov, double near, double far);
 
-	void setCameraPos();
-	Matrix3d& getCameraPos();
+	const double getNear() const;
+	const double getFar() const;
+	const double getFov() const;
+	void setCameraPos(Vector3d newPosition);
+	Matrix3d& getMatrix();
 	void moveCamera(Vector3d movement);
 };
 

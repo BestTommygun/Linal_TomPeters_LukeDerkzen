@@ -66,7 +66,6 @@ Vector3d Matrix3d::operator*(const Vector3d& vector) const
 	y = pRet.y / affineRatio;
 	z = pRet.z / affineRatio;
 	return Vector3d(x, y, z);
-
 }
 
 Matrix3d Matrix3d::operator*(const Matrix3d& other) const
@@ -123,6 +122,49 @@ void Matrix3d::operator*=(const Matrix3d& other)
 	m42 = newMatrix.m42;
 	m43 = newMatrix.m43;
 	m44 = newMatrix.m44;
+}
+
+Vector3d Matrix3d::getRightDirection() const
+{
+	return Vector3d(m11, m12, m13);
+}
+
+Vector3d Matrix3d::getLeftDirection() const
+{
+	return Vector3d(-m11, -m12, -m13);
+}
+
+Vector3d Matrix3d::getUpDirection() const
+{
+	return Vector3d(m21, m22, m23);
+}
+
+Vector3d Matrix3d::getDownDirection() const
+{
+	return Vector3d(-m21, -m22, -m23);
+}
+
+Vector3d Matrix3d::getFrontDirection() const
+{
+	return Vector3d(m31, m32, m33);
+}
+
+Vector3d Matrix3d::getBackDirection() const
+{
+	return Vector3d(-m31, -m32, -m33);
+}
+
+Matrix3d Matrix3d::createLookAt(Vector3d cameraPosition, Vector3d cameraTarget, Vector3d cameraUpVector)
+{
+	Vector3d vector = (cameraPosition - cameraTarget).normalize();
+	Vector3d vector2 = cameraUpVector.crossProduct(vector).normalize();
+	Vector3d vector3 = vector.crossProduct(vector2);
+
+	return Matrix3d(
+		vector2.x, vector3.x, vector.x, 0.0,
+		vector2.y, vector3.y, vector.y, 0.0,
+		vector2.z, vector3.z, vector.z, 0.0,
+		-vector2.dot(cameraPosition), -vector3.dot(cameraPosition), -vector.dot(cameraPosition), 1.0);
 }
 
 Vector3d Matrix3d::getPosition() const
