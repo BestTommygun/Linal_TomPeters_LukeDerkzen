@@ -17,6 +17,11 @@ public:
 	const double getFov() const;
 	void setCameraPos(Vector3d newPosition);
 	Matrix3d& getMatrix();
+	Matrix3d getPerspectiveMatrix();
+
 	void moveCamera(Vector3d movement);
+	void rotateAroundX(double radAngle);
+	void rotateAroundY(double radAngle);
+	void rotateAroundZ(double radAngle);
 };
 

@@ -34,6 +34,9 @@ public:
 	Vector3d getBackDirection() const;
 
 	static Matrix3d createLookAt(Vector3d cameraPosition, Vector3d cameraTarget, Vector3d cameraUpVector);
+	void rotateAroundXAxis(double radAngle);
+	void rotateAroundYAxis(double radAngle);
+	void rotateAroundZAxis(double radAngle);
 	Vector3d getPosition() const;
 	bool isIdentity() const;
 	bool isAffine() const;

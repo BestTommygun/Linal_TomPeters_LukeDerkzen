@@ -167,6 +167,121 @@ Matrix3d Matrix3d::createLookAt(Vector3d cameraPosition, Vector3d cameraTarget, 
 		-vector2.dot(cameraPosition), -vector3.dot(cameraPosition), -vector.dot(cameraPosition), 1.0);
 }
 
+void Matrix3d::rotateAroundXAxis(double radAngle)
+{
+	//get trig values
+	double sinValue = std::sin(radAngle); 
+	double cosValue = std::cos(radAngle);
+
+	//save values for matrix as it now stands
+	double m21 = this->m21;
+	double m22 = this->m22;
+	double m23 = this->m23;
+	double m24 = this->m24;
+	double m31 = this->m31;
+	double m32 = this->m32;
+	double m33 = this->m33;
+	double m34 = this->m34;
+
+	if (this->isIdentity())
+	{
+		this->m22 = cosValue;
+		this->m23 = sinValue;
+		this->m32 = -sinValue;
+		this->m33 = cosValue;
+	}
+	else
+	{
+		//since we rotate around the x axis we only need 2 (y) and 3(z)
+		this->m21 = m21 * cosValue + m31 * sinValue;
+		this->m22 = m22 * cosValue + m32 * sinValue;
+		this->m23 = m23 * cosValue + m33 * sinValue;
+		this->m24 = m24 * cosValue + m34 * sinValue;
+
+		this->m31 = m21 * -sinValue + m31 * cosValue;
+		this->m32 = m22 * -sinValue + m32 * cosValue;
+		this->m33 = m23 * -sinValue + m33 * cosValue;
+		this->m34 = m24 * -sinValue + m34 * cosValue;
+	}
+}
+
+void Matrix3d::rotateAroundYAxis(double radAngle)
+{
+	//get trig values
+	double sinValue = std::sin(radAngle);
+	double cosValue = std::cos(radAngle);
+
+	//save values for matrix as it now stands
+	double m11 = this->m11;
+	double m12 = this->m12;
+	double m13 = this->m13;
+	double m14 = this->m14;
+	double m31 = this->m31;
+	double m32 = this->m32;
+	double m33 = this->m33;
+	double m34 = this->m34;
+
+	if (this->isIdentity())
+	{
+		this->m11 = cosValue;
+		this->m13 = -sinValue;
+		this->m31 = sinValue;
+		this->m33 = cosValue;
+	}
+	else
+	{
+		//since we rotate around y we only need 1 (x) and 3 (z)
+		this->m11 = m11 * cosValue + m31 * -sinValue;
+		this->m12 = m12 * cosValue + m32 * -sinValue;
+		this->m13 = m13 * cosValue + m33 * -sinValue;
+		this->m14 = m14 * cosValue + m34 * -sinValue;
+
+		this->m31 = m11 * sinValue + m31 * cosValue;
+		this->m32 = m12 * sinValue + m32 * cosValue;
+		this->m33 = m13 * sinValue + m33 * cosValue;
+		this->m34 = m14 * sinValue + m34 * cosValue;
+	}
+}
+
+void Matrix3d::rotateAroundZAxis(double radAngle)
+{
+	//get trig values
+	double sinValue = std::sin(radAngle);
+	double cosValue = std::cos(radAngle);
+
+	//save values for matrix as it now stands
+	double m11 = this->m11;
+	double m12 = this->m12;
+	double m13 = this->m13;
+	double m14 = this->m14;
+	double m21 = this->m21;
+	double m22 = this->m22;
+	double m23 = this->m23;
+	double m24 = this->m24;
+
+	if (this->isIdentity())
+	{
+		this->m11 = cosValue;
+		this->m12 = sinValue;
+		this->m21 = -sinValue;
+		this->m22 = cosValue;
+	}
+	else
+	{
+		//since we are rotating z we only need 1 (x) and 2 (y)
+		this->m11 = m11 * cosValue + m21 * sinValue;
+		this->m12 = m12 * cosValue + m22 * sinValue;
+		this->m13 = m13 * cosValue + m23 * sinValue;
+		this->m14 = m14 * cosValue + m24 * sinValue;
+
+		this->m21 = m11 * -sinValue + m21 * cosValue;
+		this->m22 = m12 * -sinValue + m22 * cosValue;
+		this->m23 = m13 * -sinValue + m23 * cosValue;
+		this->m24 = m14 * -sinValue + m24 * cosValue;
+	}
+}
+
+
 Vector3d Matrix3d::getPosition() const
 {
 	return Vector3d(m41, m42, m43);

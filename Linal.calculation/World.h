@@ -16,6 +16,7 @@ public:
 
 	void prepareWorld();
 	void moveCamera(Vector3d movement);
+
 	Camera& getCamera() const;
 
 	std::vector<Object3d> getWorldObjects() {

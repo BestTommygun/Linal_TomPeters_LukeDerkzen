@@ -90,7 +90,7 @@ World::~World()
 void World::prepareWorld()
 {
 	//make objects here
-	camera = new Camera(Vector3d(0, 0, 0), 120, 1, 100);
+	camera = new Camera(Vector3d(0, 0, 0), 90, 1, 100);
 
 	worldObjects.push_back(makeCube(Vector3d(0, 0, 10)));
 	worldObjects.push_back(makeCube(Vector3d(0, 0, 5)));

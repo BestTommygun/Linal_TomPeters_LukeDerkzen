@@ -10,18 +10,8 @@ System::Collections::Generic::List<RenderLine>^ Renderer::calculateFrame(const s
 {
 	Matrix3d camMatrix = this->camera.getMatrix();
 	Vector3d cameraTarget = camMatrix.getPosition() - camMatrix.getBackDirection();
-	Matrix3d lookAt = Matrix3d::createLookAt(camMatrix.getPosition(), cameraTarget, Vector3d::yAxis);
-
-	double scale = camera.getNear() * std::tan(((camera.getFov() / 360) * 2 * PI) * 0.5);
-	double m33 = -camera.getFar() / (camera.getFar() - camera.getNear());
-	double m43 = (-camera.getFar() * camera.getNear()) / (camera.getFar() - camera.getNear());
-
-	Matrix3d projectionMatrix = Matrix3d(
-		scale, 0, 0, 0,
-		0, scale, 0, 0,
-		0, 0, m33, m43,
-		0, 0, -1, 0
-	);
+	Matrix3d lookAtMatrix = Matrix3d::createLookAt(camMatrix.getPosition(), cameraTarget, Vector3d::yAxis);
+	Matrix3d projectionMatrix = camera.getPerspectiveMatrix();
 
 	const std::vector<Object3d>& worldObjectsCopy = toRenderObjects;
 	System::Collections::Generic::List<RenderLine>^ returnLines = gcnew System::Collections::Generic::List<RenderLine>();
@@ -30,7 +20,7 @@ System::Collections::Generic::List<RenderLine>^ Renderer::calculateFrame(const s
 	for (size_t i = 0; i < worldObjectsCopySize; i++) {
 		auto& curObject = worldObjectsCopy[i];
 
-		Matrix3d curObjectMatrix = curObject.getPosition() * lookAt;
+		Matrix3d curObjectMatrix = curObject.getPosition() * lookAtMatrix;
 		std::vector<PointXYW> points;
 		System::Console::WriteLine(System::Math::Round(curObjectMatrix.m41,2) + ":" + System::Math::Round(curObjectMatrix.m42,2) + ":" + System::Math::Round(curObjectMatrix.m43,2) + ":");
 

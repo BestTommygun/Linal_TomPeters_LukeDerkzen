@@ -67,6 +67,12 @@ void WorldThread::handleInputs(System::Char input)
 	case 'd':
 		world->moveCamera(Vector3d(0.1, 0, 0));
 		break;
+	case 'q':
+		world->getCamera().rotateAroundY(((-5.0 / 360.0) * 2.0 * PI)); //TODO: looks really weird? investigate
+		break;
+	case 'e':
+		world->getCamera().rotateAroundY(((5.0 / 360.0) * 2.0 * PI)); //TODO: looks really weird? investigate
+		break;
 	case 't':
 		std::cout << "this should enable debug mode which shows us the axis of everything\n";
 		break;
