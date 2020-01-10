@@ -1,7 +1,7 @@
 #include "BaseBehaviour.h"
 
 BaseBehaviour::BaseBehaviour(Object3d& object) noexcept : 
-	object{ &object }
+	parent{ &object }
 { }
 
 BaseBehaviour::~BaseBehaviour() noexcept

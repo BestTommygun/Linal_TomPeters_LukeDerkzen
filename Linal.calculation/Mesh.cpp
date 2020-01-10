@@ -103,3 +103,8 @@ const size_t* Mesh::getTriangles() const
 {
 	return triangles;
 }
+
+void Mesh::setVertexes(const std::vector<Vector3d>& newVertexes)
+{
+	vertexes = newVertexes;
+}

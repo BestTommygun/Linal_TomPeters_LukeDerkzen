@@ -1,14 +1,16 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include "Data/Vector3d.h"
 #include "Mesh.h"
+#include "Data/Vector3d.h"
+#include "Behaviours/BaseBehaviour.h"
 
 class Object3d
 {
 private:
 	Matrix3d position;
 	Mesh* mesh;
+	std::vector<BaseBehaviour> behaviours;
 
 public:
 
@@ -26,6 +28,10 @@ public:
 	const Matrix3d& getPosition() const;
 	void setPosition(const Matrix3d& newPosition);
 	const Mesh& getMesh() const;
+	Mesh& getMesh();
 	void setMesh(const Mesh& newMesh);
+
+	void addBehaviour(BaseBehaviour& newBehaviour);
+	void update(double deltaTime);
 };
 

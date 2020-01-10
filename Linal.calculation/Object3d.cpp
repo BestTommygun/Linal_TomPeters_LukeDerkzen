@@ -66,8 +66,25 @@ void Object3d::setPosition(const Matrix3d& newPosition)
 const Mesh& Object3d::getMesh() const {
 	return *mesh;
 }
+Mesh& Object3d::getMesh()
+{
+	return *mesh;
+}
 void Object3d::setMesh(const Mesh& newMesh) {
 	delete mesh;
 	mesh = nullptr;
 	mesh = new Mesh(newMesh);
+}
+
+void Object3d::addBehaviour(BaseBehaviour& newBehaviour)
+{
+	behaviours.push_back(newBehaviour);
+}
+
+void Object3d::update(double deltaTime)
+{
+	size_t behavioursSize = behaviours.size();
+	for (size_t i = 0; i < behavioursSize; i++) {
+		behaviours[i].Update(deltaTime);
+	}
 }

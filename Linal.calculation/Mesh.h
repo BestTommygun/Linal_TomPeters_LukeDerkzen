@@ -26,4 +26,6 @@ public:
 
     size_t getTrianglesSize() const;
     const size_t* getTriangles() const;
+    const std::vector<Vector3d>& getVertexes() const;
+    void setVertexes(const std::vector<Vector3d>& newVertexes);
 };

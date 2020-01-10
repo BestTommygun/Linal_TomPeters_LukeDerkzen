@@ -2,6 +2,7 @@
 #include <vector>
 #include "Camera.h"
 #include "Object3d.h"
+#include "Behaviours/PulseBehaviour.h"
 
 class World
 {

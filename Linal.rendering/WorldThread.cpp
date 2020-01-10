@@ -48,6 +48,10 @@ void WorldThread::run() {
 
 void WorldThread::updateWorld(System::TimeSpan deltaTime)
 {
+	size_t worldObjectsSize = world->getWorldObjects().size();
+	for (size_t i = 0; i < worldObjectsSize; i++) {
+		world->getWorldObjects()[i].update(deltaTime.TotalMilliseconds);
+	}
 }
 
 void WorldThread::handleInputs(System::Char input)

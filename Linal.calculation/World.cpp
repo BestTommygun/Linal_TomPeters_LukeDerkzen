@@ -73,6 +73,8 @@ Object3d World::makeCube(Vector3d position)
 	Object3d object3d = Object3d();
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
+	PulseBehaviour behaviour = PulseBehaviour(object3d);
+	object3d.addBehaviour(behaviour);
 
 	return object3d;
 }
