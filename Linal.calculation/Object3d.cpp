@@ -75,6 +75,21 @@ void Object3d::setPosition(const Matrix3d& newPosition)
 	this->position = newPosition;
 }
 
+void Object3d::rotateAroundX(double radAngle)
+{
+	this->position.rotateAroundXAxis(radAngle);
+}
+
+void Object3d::rotateAroundY(double radAngle)
+{
+	this->position.rotateAroundYAxis(radAngle);
+}
+
+void Object3d::rotateAroundZ(double radAngle)
+{
+	this->position.rotateAroundZAxis(radAngle);
+}
+
 const Mesh& Object3d::getMesh() const {
 	return *mesh;
 }

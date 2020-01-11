@@ -27,6 +27,10 @@ public:
 
 	const Matrix3d& getPosition() const;
 	void setPosition(const Matrix3d& newPosition);
+	void rotateAroundX(double radAngle);
+	void rotateAroundY(double radAngle);
+	void rotateAroundZ(double radAngle);
+
 	const Mesh& getMesh() const;
 	Mesh& getMesh();
 	void setMesh(const Mesh& newMesh);
