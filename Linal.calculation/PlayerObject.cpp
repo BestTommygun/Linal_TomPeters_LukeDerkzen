@@ -135,7 +135,7 @@ Object3d PlayerObject::getPrefab()
 		Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
 		bullet.setMesh(cubeMesh);
 		bullet.addBehaviour(std::make_unique<RotationBehaviour>(bullet, RotationDirection::Z, 4));
-		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, 2.0));
+		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, 0.5));
 
    		return bullet;
 	}
