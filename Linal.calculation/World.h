@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Object3d.h"
 #include "Behaviours/PulseBehaviour.h"
+#include "Behaviours/RotationBehaviour.h"
 
 class World
 {

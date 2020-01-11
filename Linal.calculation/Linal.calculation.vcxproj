@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="Behaviours\BaseBehaviour.cpp" />
     <ClCompile Include="Behaviours\PulseBehaviour.cpp" />
+    <ClCompile Include="Behaviours\RotationBehaviour.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Data\Matrix3d.cpp" />
     <ClCompile Include="Data\Transform.cpp" />
@@ -163,8 +164,10 @@
   <ItemGroup>
     <ClInclude Include="Behaviours\BaseBehaviour.h" />
     <ClInclude Include="Behaviours\PulseBehaviour.h" />
+    <ClInclude Include="Behaviours\RotationBehaviour.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Data\Matrix3d.h" />
+    <ClInclude Include="Data\RotationDirection.h" />
     <ClInclude Include="Data\Transform.hpp" />
     <ClInclude Include="Data\Vector2d.h" />
     <ClInclude Include="Data\Vector3d.h" />

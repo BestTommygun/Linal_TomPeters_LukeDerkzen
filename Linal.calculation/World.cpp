@@ -73,7 +73,10 @@ Object3d World::makeCube(Vector3d position)
 	Object3d object3d = Object3d();
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
-	object3d.addBehaviour(std::make_unique<PulseBehaviour>(object3d));
+	//object3d.addBehaviour(std::make_unique<PulseBehaviour>(object3d));
+	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::X, 1));
+	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Y, 1));
+	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Z, 1));
 
 	return object3d;
 }
