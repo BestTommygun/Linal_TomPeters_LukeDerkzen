@@ -3,15 +3,15 @@
 Object3d World::makeCube(Vector3d position)
 {
 	std::vector<Vector3d> vertexes = std::vector<Vector3d>();
-	vertexes.push_back(Vector3d(0.0, 0.0, 0.0));
-	vertexes.push_back(Vector3d(1.0, 0.0, 0.0));
-	vertexes.push_back(Vector3d(0.0, 1.0, 0.0));
-	vertexes.push_back(Vector3d(1.0, 1.0, 0.0));
+	vertexes.push_back(Vector3d(-1.0, -1.0, -1.0));
+	vertexes.push_back(Vector3d(1.0,  -1.0, -1.0));
+	vertexes.push_back(Vector3d(-1.0, 1.0,  -1.0));
+	vertexes.push_back(Vector3d(1.0,  1.0,  -1.0));
 
-	vertexes.push_back(Vector3d(0.0, 0.0, 1.0));
-	vertexes.push_back(Vector3d(1.0, 0.0, 1.0));
-	vertexes.push_back(Vector3d(0.0, 1.0, 1.0));
-	vertexes.push_back(Vector3d(1.0, 1.0, 1.0));
+	vertexes.push_back(Vector3d(-1.0, -1.0, 1.0));
+	vertexes.push_back(Vector3d(1.0,  -1.0, 1.0));
+	vertexes.push_back(Vector3d(-1.0, 1.0,  1.0));
+	vertexes.push_back(Vector3d(1.0,  1.0,  1.0));
 
 	std::vector<size_t> triangles = std::vector<size_t>();
 	//front side
@@ -70,13 +70,11 @@ Object3d World::makeCube(Vector3d position)
 
 	Mesh cubeMesh = Mesh(vertexes, triangles);
 
-	Object3d object3d = Object3d();
+	Object3d object3d = Object3d(Vector3d(0.5, 0.5, 0.5));
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
 	//object3d.addBehaviour(std::make_unique<PulseBehaviour>(object3d));
 	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::X, 1));
-	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Y, 1));
-	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Z, 1));
 
 	return object3d;
 }
