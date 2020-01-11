@@ -50,7 +50,11 @@ void WorldThread::updateWorld(System::TimeSpan deltaTime)
 {
 	size_t worldObjectsSize = world->getWorldObjects().size();
 	for (size_t i = 0; i < worldObjectsSize; i++) {
-		world->getWorldObjects()[i]->update(deltaTime.TotalMilliseconds);
+		if (world->getWorldObjects()[i]->getShouldDestroy()) {
+			world->getWorldObjects().pop_back(); //if needed the to be deleted object can be accessed here
+		}
+		else
+			world->getWorldObjects()[i]->update(deltaTime.TotalMilliseconds);
 	}
 }
 
@@ -60,22 +64,43 @@ void WorldThread::handleInputs(System::Char input)
 	switch (input)
 	{
 	case 'w':
-		world->moveCamera(Vector3d(0, 0, 0.1));
+		world->moveCamera(world->getCamera().getMatrix().getFrontDirection() * 0.1);
 		break;
 	case 'a':
-		world->moveCamera(Vector3d(-0.1, 0, 0));
+		world->moveCamera(world->getCamera().getMatrix().getLeftDirection() * 0.1);
 		break;
 	case 's':
-		world->moveCamera(Vector3d(0, 0, -0.1));
+		world->moveCamera(world->getCamera().getMatrix().getBackDirection() * 0.1);
 		break;
 	case 'd':
-		world->moveCamera(Vector3d(0.1, 0, 0));
+		world->moveCamera(world->getCamera().getMatrix().getRightDirection() * 0.1);
 		break;
 	case 'q':
 		world->getCamera().rotateAroundY(((-5.0 / 360.0) * 2.0 * PI)); //TODO: looks really weird? investigate
 		break;
 	case 'e':
 		world->getCamera().rotateAroundY(((5.0 / 360.0) * 2.0 * PI)); //TODO: looks really weird? investigate
+		break;
+	case 'i':
+		world->getPlayerObject()->get()->move(Matrix3d(world->getPlayerObject()->get()->getPosition().getFrontDirection() * 0.1));
+		break;
+	case 'j':
+		world->getPlayerObject()->get()->move(Matrix3d(world->getPlayerObject()->get()->getPosition().getLeftDirection() * 0.1));
+		break;
+	case 'k':
+		world->getPlayerObject()->get()->move(Matrix3d(world->getPlayerObject()->get()->getPosition().getBackDirection() * 0.1));
+		break;
+	case 'l':
+		world->getPlayerObject()->get()->move(Matrix3d(world->getPlayerObject()->get()->getPosition().getRightDirection() * 0.1));
+		break;
+	case 'u':
+		world->getPlayerObject()->get()->rotateAroundY(((-5.0 / 360.0) * 2.0 * PI));
+		break;
+	case 'o':
+		world->getPlayerObject()->get()->rotateAroundY(((5.0 / 360.0) * 2.0 * PI));
+		break;
+	case ' ':
+		world->setWorldObject(std::move(world->getPlayerObject()->get()->getPrefab()));
 		break;
 	case 't':
 		std::cout << "this should enable debug mode which shows us the axis of everything\n";

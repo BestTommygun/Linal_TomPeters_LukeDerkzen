@@ -7,20 +7,21 @@
 
 class Object3d
 {
-private:
-	bool isPlayer;
-	Matrix3d position;
+protected:
 	Mesh* mesh;
+	Matrix3d position;
+	bool shouldDestroy;
+	double coolDowntimer;
 	std::vector<std::unique_ptr<BaseBehaviour>> behaviours;
 
 public:
 
 	Object3d() : Object3d(Vector3d(0, 0, 0)) {};
-	Object3d(const Object3d& toCopy) noexcept;
-	Object3d(Object3d&& toMove) noexcept;
 	Object3d(const Vector3d& newPosition);
 	~Object3d();
 
+	Object3d(const Object3d& toCopy) noexcept;
+	Object3d(Object3d&& toMove) noexcept;
 	Object3d& operator=(const Object3d& toCopy) noexcept;
 	Object3d& operator=(Object3d&& toMove) noexcept;
 
@@ -35,8 +36,15 @@ public:
 	const Mesh& getMesh() const;
 	Mesh& getMesh();
 	void setMesh(const Mesh& newMesh);
+	virtual const bool getIsPlayer() const;
+	virtual const bool getShouldDestroy() const;
+	virtual Object3d getPrefab();
+
+	void setCoolDownTimer(const double newCoolDownTimer);
+	const double getCoolDowntimer() const;
 
 	void addBehaviour(std::unique_ptr<BaseBehaviour> newBehaviour);
 	void update(double deltaTime);
+	void markForDestruction();
 };
 

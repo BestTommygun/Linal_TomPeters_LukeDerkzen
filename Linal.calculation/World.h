@@ -2,6 +2,7 @@
 #include <vector>
 #include "Camera.h"
 #include "Object3d.h"
+#include "PlayerObject.h"
 #include "Behaviours/PulseBehaviour.h"
 #include "Behaviours/RotationBehaviour.h"
 
@@ -12,7 +13,7 @@ protected:
 	Camera* camera;
 
 	Object3d makeCube(Vector3d position);
-	Object3d makePlayer(Vector3d position);
+	PlayerObject makePlayer(Vector3d position);
 public:
 	World();
 	~World();
@@ -21,9 +22,8 @@ public:
 	void moveCamera(Vector3d movement);
 
 	Camera& getCamera() const;
-
-	std::vector<std::unique_ptr<Object3d>>& getWorldObjects() {
-		return worldObjects;
-	}
+	std::unique_ptr<Object3d>* getPlayerObject();
+	std::vector<std::unique_ptr<Object3d>>& getWorldObjects();
+	void setWorldObject(Object3d& newObject);
 };
 

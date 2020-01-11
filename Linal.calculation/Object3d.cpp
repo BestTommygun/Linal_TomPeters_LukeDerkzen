@@ -5,6 +5,9 @@ Object3d::Object3d(const Object3d& toCopy) noexcept
 {
 	this->mesh = new Mesh(*toCopy.mesh);
 	this->position = toCopy.position;
+	this->shouldDestroy = toCopy.shouldDestroy;
+	this->coolDowntimer = toCopy.coolDowntimer;
+
 }
 
 Object3d::Object3d(Object3d&& toMove) noexcept
@@ -13,6 +16,8 @@ Object3d::Object3d(Object3d&& toMove) noexcept
 	toMove.mesh = nullptr;
 	this->position = toMove.position;
 	this->behaviours = std::move(toMove.behaviours);
+	this->coolDowntimer = toMove.coolDowntimer;
+	this->shouldDestroy = toMove.shouldDestroy;
 
 	size_t behavioursSize = this->behaviours.size();
 	for (size_t i = 0; i < behavioursSize; i++) {
@@ -20,11 +25,12 @@ Object3d::Object3d(Object3d&& toMove) noexcept
 	}
 }
 
-Object3d::Object3d(const Vector3d& newPosition)
-{
-	position = Matrix3d(newPosition);
-	mesh = new Mesh();
-}
+Object3d::Object3d(const Vector3d& newPosition) : 
+	position{ Matrix3d(newPosition) },
+	mesh{ new Mesh() },
+	shouldDestroy{ false },
+	coolDowntimer{ 0.0 }
+{ }
 
 Object3d::~Object3d()
 {
@@ -39,6 +45,9 @@ Object3d& Object3d::operator=(const Object3d& toCopy) noexcept
 
 		this->mesh = new Mesh(*toCopy.mesh);
 		this->position = toCopy.position;
+		this->coolDowntimer = toCopy.coolDowntimer;
+		this->shouldDestroy = toCopy.shouldDestroy;
+
 	}
 	return *this;
 }
@@ -51,6 +60,8 @@ Object3d& Object3d::operator=(Object3d&& toMove) noexcept
 		toMove.mesh = nullptr;
 		this->position = toMove.position;
 		this->behaviours = std::move(toMove.behaviours);
+		this->coolDowntimer = toMove.coolDowntimer;
+		this->shouldDestroy = toMove.shouldDestroy;
 
 		size_t behavioursSize = this->behaviours.size();
 		for (size_t i = 0; i < behavioursSize; i++) {
@@ -103,6 +114,31 @@ void Object3d::setMesh(const Mesh& newMesh) {
 	mesh = new Mesh(newMesh);
 }
 
+const bool Object3d::getIsPlayer() const
+{
+	return false;
+}
+
+const bool Object3d::getShouldDestroy() const
+{
+	return shouldDestroy;
+}
+
+Object3d Object3d::getPrefab()
+{
+	return Object3d(this->getPosition().getPosition());;
+}
+
+void Object3d::setCoolDownTimer(const double newCoolDownTimer)
+{
+	coolDowntimer = newCoolDownTimer;
+}
+
+const double Object3d::getCoolDowntimer() const
+{
+	return coolDowntimer;
+}
+
 void Object3d::addBehaviour(std::unique_ptr<BaseBehaviour> newBehaviour)
 {
 	behaviours.push_back(std::move(newBehaviour));
@@ -114,4 +150,9 @@ void Object3d::update(double deltaTime)
 	for (size_t i = 0; i < behavioursSize; i++) {
 		behaviours[i]->Update(deltaTime);
 	}
+}
+
+void Object3d::markForDestruction()
+{
+	shouldDestroy = true;
 }

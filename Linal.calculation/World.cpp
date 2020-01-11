@@ -1,6 +1,6 @@
 #include "World.h"
 
-Object3d World::makePlayer(Vector3d position) 
+PlayerObject World::makePlayer(Vector3d position) 
 {
 	std::vector<Vector3d> vertexes = std::vector<Vector3d>();
 	vertexes.push_back(Vector3d(-1.0, -1.0, -1.0));
@@ -70,7 +70,7 @@ Object3d World::makePlayer(Vector3d position)
 
 	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
 
-	Object3d object3d = Object3d(Vector3d(0.0, 0.0, 0.0));
+	PlayerObject object3d = PlayerObject(Vector3d(0.0, 0.0, 0.0), 1);
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
 
@@ -160,7 +160,6 @@ Object3d World::makeCube(Vector3d position)
 
 World::World() : 
 	worldObjects{ std::vector<std::unique_ptr<Object3d>>() },
-	playerObject{ Object3d() },
 	camera{ &Camera() }
 { }
 
@@ -174,7 +173,7 @@ void World::prepareWorld()
 	//make objects here
 	camera = new Camera(Vector3d(0, 0, 0), 90, 1, 100);
 
-	worldObjects.push_back(std::make_unique<Object3d>(std::move(makePlayer(Vector3d(-10, -3, 2)))));
+	worldObjects.push_back(std::make_unique<PlayerObject>(std::move(makePlayer(Vector3d(-10, -3, 2)))));
 	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 5, 10)))));
 	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 0, 5)))));
 	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(-10, -3, 2)))));
@@ -187,4 +186,26 @@ void World::moveCamera(Vector3d movement)
 
 Camera& World::getCamera() const {
 	return *camera;
+}
+
+std::unique_ptr<Object3d>* World::getPlayerObject() {
+
+	size_t worldObjectsSize = worldObjects.size();
+	for (size_t i = 0; i < worldObjectsSize; i++) {
+		std::unique_ptr<Object3d>& curObject = worldObjects.at(i);
+
+		if(curObject->getIsPlayer())
+			return &curObject;
+	}
+
+	return nullptr;
+}
+
+std::vector<std::unique_ptr<Object3d>>& World::getWorldObjects() {
+	return worldObjects;
+}
+
+void World::setWorldObject(Object3d& newObject)
+{
+	worldObjects.push_back(std::make_unique<Object3d>(std::move(newObject)));
 }
