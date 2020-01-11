@@ -13,6 +13,6 @@ public:
 	Renderer(Camera& camera);
 
 	/// <Summary> converts all vertexes of objects to actual positions to be ready for render </Summary>
-	System::Collections::Generic::List<RenderLine>^ calculateFrame(const std::vector<Object3d>& toRenderObjects, double screenWidth, double screenHeight);
+	System::Collections::Generic::List<RenderLine>^ calculateFrame(const std::vector<std::unique_ptr<Object3d>>& toRenderObjects, double screenWidth, double screenHeight);
 };
 

@@ -8,6 +8,7 @@
 class Object3d
 {
 private:
+	bool isPlayer;
 	Matrix3d position;
 	Mesh* mesh;
 	std::vector<std::unique_ptr<BaseBehaviour>> behaviours;

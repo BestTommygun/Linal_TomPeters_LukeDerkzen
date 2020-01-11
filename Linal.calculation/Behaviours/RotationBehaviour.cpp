@@ -12,7 +12,7 @@ RotationBehaviour::~RotationBehaviour()
 }
 
 RotationBehaviour::RotationBehaviour(RotationBehaviour&& toMove) noexcept :
-	BaseBehaviour(*toMove.parent)
+	BaseBehaviour(std::move(toMove))
 {
 	this->parent = toMove.parent;
 	this->rotationAxis = toMove.rotationAxis;
@@ -25,10 +25,10 @@ RotationBehaviour& RotationBehaviour::operator=(RotationBehaviour&& toMove) noex
 {
 	if (this != &toMove) {
 		this->parent = toMove.parent;
+		toMove.parent = nullptr;
 		this->rotationAxis = toMove.rotationAxis;
 		this->RotationInRad = toMove.RotationInRad;
 
-		toMove.parent = nullptr;
 	}
 	return *this;
 }

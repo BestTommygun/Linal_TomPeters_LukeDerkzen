@@ -26,3 +26,8 @@ void BaseBehaviour::setParent(Object3d& parent)
 	this->parent = &parent;
 }
 
+const Object3d& BaseBehaviour::getParent()
+{
+	return *parent;
+}
+

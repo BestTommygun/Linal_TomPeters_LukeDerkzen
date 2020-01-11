@@ -167,6 +167,52 @@ Matrix3d Matrix3d::createLookAt(Vector3d cameraPosition, Vector3d cameraTarget, 
 		-vector2.dot(cameraPosition), -vector3.dot(cameraPosition), -vector.dot(cameraPosition), 1.0);
 }
 
+Matrix3d& Matrix3d::invertMatrix(Matrix3d toInvert)
+{
+	// Cache the matrix values
+	double a00 = toInvert.m11, a01 = toInvert.m12, a02 = toInvert.m13, a03 = toInvert.m14,
+		a10 = toInvert.m21, a11 = toInvert.m22, a12 = toInvert.m23, a13 = toInvert.m24,
+		a20 = toInvert.m31, a21 = toInvert.m32, a22 = toInvert.m33, a23 = toInvert.m34,
+		a30 = toInvert.m41, a31 = toInvert.m42, a32 = toInvert.m43, a33 = toInvert.m44;
+
+		double b00 = a00 * a11 - a01 * a10,
+		b01 = a00 * a12 - a02 * a10,
+		b02 = a00 * a13 - a03 * a10,
+		b03 = a01 * a12 - a02 * a11,
+		b04 = a01 * a13 - a03 * a11,
+		b05 = a02 * a13 - a03 * a12,
+		b06 = a20 * a31 - a21 * a30,
+		b07 = a20 * a32 - a22 * a30,
+		b08 = a20 * a33 - a23 * a30,
+		b09 = a21 * a32 - a22 * a31,
+		b10 = a21 * a33 - a23 * a31,
+		b11 = a22 * a33 - a23 * a32;
+		// Calculate the determinant
+		double d = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+
+	if (d == 0) { throw std::exception("Matrix does not have an inverse"); }
+	auto invDet = 1 / d;
+
+	toInvert.m11 = (a11 * b11 - a12 * b10 + a13 * b09)  * invDet;
+	toInvert.m12 = (-a01 * b11 + a02 * b10 - a03 * b09) * invDet;
+	toInvert.m13 = (a31 * b05 - a32 * b04 + a33 * b03)  * invDet;
+	toInvert.m14 = (-a21 * b05 + a22 * b04 - a23 * b03) * invDet;
+	toInvert.m21 = (-a10 * b11 + a12 * b08 - a13 * b07) * invDet;
+	toInvert.m22 = (a00 * b11 - a02 * b08 + a03 * b07)  * invDet;
+	toInvert.m23 = (-a30 * b05 + a32 * b02 - a33 * b01) * invDet;
+	toInvert.m24 = (a20 * b05 - a22 * b02 + a23 * b01)  * invDet;
+	toInvert.m31 = (a10 * b10 - a11 * b08 + a13 * b06)  * invDet;
+	toInvert.m32 = (-a00 * b10 + a01 * b08 - a03 * b06) * invDet;
+	toInvert.m33 = (a30 * b04 - a31 * b02 + a33 * b00)  * invDet;
+	toInvert.m34 = (-a20 * b04 + a21 * b02 - a23 * b00) * invDet;
+	toInvert.m41 = (-a10 * b09 + a11 * b07 - a12 * b06) * invDet;
+	toInvert.m42 = (a00 * b09 - a01 * b07 + a02 * b06)  * invDet;
+	toInvert.m43 = (-a30 * b03 + a31 * b01 - a32 * b00) * invDet;
+	toInvert.m44 = (a20 * b03 - a21 * b01 + a22 * b00)  * invDet;
+
+	return toInvert;
+}
+
 void Matrix3d::rotateAroundXAxis(double radAngle)
 {
 	//get trig values

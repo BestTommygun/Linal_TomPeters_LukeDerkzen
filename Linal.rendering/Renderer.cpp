@@ -6,28 +6,28 @@ Renderer::Renderer(Camera& camera) :
 {
 }
 
-System::Collections::Generic::List<RenderLine>^ Renderer::calculateFrame(const std::vector<Object3d>& toRenderObjects, double screenWidth, double screenHeight)
+System::Collections::Generic::List<RenderLine>^ Renderer::calculateFrame(const std::vector<std::unique_ptr<Object3d>>& toRenderObjects, double screenWidth, double screenHeight)
 {
 	Matrix3d camMatrix = this->camera.getMatrix();
 	Vector3d cameraTarget = camMatrix.getPosition() - camMatrix.getBackDirection();
 	Matrix3d lookAtMatrix = Matrix3d::createLookAt(camMatrix.getPosition(), cameraTarget, Vector3d::yAxis);
 	Matrix3d projectionMatrix = camera.getPerspectiveMatrix();
 
-	const std::vector<Object3d>& worldObjectsCopy = toRenderObjects;
+	const std::vector<std::unique_ptr<Object3d>>& worldObjectsCopy = toRenderObjects;
 	System::Collections::Generic::List<RenderLine>^ returnLines = gcnew System::Collections::Generic::List<RenderLine>();
 
 	size_t worldObjectsCopySize = worldObjectsCopy.size();
 	for (size_t i = 0; i < worldObjectsCopySize; i++) {
 		auto& curObject = worldObjectsCopy[i];
 
-		Matrix3d curObjectMatrix = curObject.getPosition() * lookAtMatrix;
+		Matrix3d curObjectMatrix = curObject->getPosition() * lookAtMatrix;
 		std::vector<PointXYW> points;
-		System::Console::WriteLine(System::Math::Round(curObjectMatrix.m41,2) + ":" + System::Math::Round(curObjectMatrix.m42,2) + ":" + System::Math::Round(curObjectMatrix.m43,2) + ":");
+		//System::Console::WriteLine(System::Math::Round(curObjectMatrix.m41,2) + ":" + System::Math::Round(curObjectMatrix.m42,2) + ":" + System::Math::Round(curObjectMatrix.m43,2) + ":");
 
-		size_t vertexesSize = curObject.getMesh().vertexes.size();
+		size_t vertexesSize = curObject->getMesh().vertexes.size();
 		points.resize(vertexesSize);
 		for (size_t j = 0; j < vertexesSize; j++) {
-			auto& curVertex = curObject.getMesh().vertexes[j];
+			auto& curVertex = curObject->getMesh().vertexes[j];
 			Matrix3d vertexMatrix = (Matrix3d(curVertex) * curObjectMatrix) * projectionMatrix;
 
 			if (vertexMatrix.m43 < camera.getFar() && vertexMatrix.m43 > camera.getNear()) {
@@ -42,10 +42,10 @@ System::Collections::Generic::List<RenderLine>^ Renderer::calculateFrame(const s
 			}
 		}
 		//convert points to a list of lines
-		const Mesh& curObjectMesh = curObject.getMesh();
+		const Mesh& curObjectMesh = curObject->getMesh();
 		const size_t* curTriangle = curObjectMesh.getTriangles();
 
-		size_t trianglesSize = curObject.getMesh().getTrianglesSize();
+		size_t trianglesSize = curObject->getMesh().getTrianglesSize();
 		for (size_t triangleIndex = 0; triangleIndex < trianglesSize; triangleIndex += 3) {
 
 			//get all triangle points and convert them to lines

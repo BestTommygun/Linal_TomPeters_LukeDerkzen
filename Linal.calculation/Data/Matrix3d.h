@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "Vector3d.h"
 
 struct Matrix3d
@@ -34,6 +35,7 @@ public:
 	Vector3d getBackDirection() const;
 
 	static Matrix3d createLookAt(Vector3d cameraPosition, Vector3d cameraTarget, Vector3d cameraUpVector);
+	static Matrix3d& invertMatrix(Matrix3d toInvert);
 	void rotateAroundXAxis(double radAngle);
 	void rotateAroundYAxis(double radAngle);
 	void rotateAroundZAxis(double radAngle);

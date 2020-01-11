@@ -8,10 +8,11 @@
 class World
 {
 protected:
-	std::vector<Object3d> worldObjects;
+	std::vector<std::unique_ptr<Object3d>> worldObjects;
 	Camera* camera;
 
 	Object3d makeCube(Vector3d position);
+	Object3d makePlayer(Vector3d position);
 public:
 	World();
 	~World();
@@ -21,8 +22,8 @@ public:
 
 	Camera& getCamera() const;
 
-	std::vector<Object3d>* getWorldObjects() {
-		return &worldObjects;
+	std::vector<std::unique_ptr<Object3d>>& getWorldObjects() {
+		return worldObjects;
 	}
 };
 

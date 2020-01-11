@@ -3,6 +3,7 @@
 #include <string>
 #include "Data/Vector3d.h"
 
+// when making a mesh keep in mind that the parent object sees 0, 0, 0 as its center
 class Mesh
 {
 private: 
@@ -15,10 +16,10 @@ private:
 public:    
     Mesh();
     Mesh(const std::vector<Vector3d>& vertexes, const std::vector<size_t>& triangles);
-    Mesh(const Mesh& toCopy) noexcept;
-    Mesh(Mesh&& toMove) noexcept;
     ~Mesh() noexcept;
 
+    Mesh(const Mesh& toCopy) noexcept;
+    Mesh(Mesh&& toMove) noexcept;
     Mesh& operator=(const Mesh& toCopy) noexcept;
     Mesh& operator=(Mesh&& toMove) noexcept;
 

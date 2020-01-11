@@ -17,7 +17,7 @@ public:
 
 	virtual void Update(double deltaTime) = 0;
 	void setParent(Object3d& parent);
-
+	const Object3d& getParent();
 };
 
 #include "../Object3d.h"
