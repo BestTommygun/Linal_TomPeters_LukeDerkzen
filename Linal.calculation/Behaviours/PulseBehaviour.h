@@ -7,7 +7,7 @@ protected:
 	Matrix3d prevScale;
 
 public:
-	PulseBehaviour(Object3d parent);
+	PulseBehaviour(Object3d& parent);
 	~PulseBehaviour();
 
 	PulseBehaviour(const PulseBehaviour& toCopy) noexcept = delete;

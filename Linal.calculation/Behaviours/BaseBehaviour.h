@@ -11,11 +11,12 @@ public:
 	virtual ~BaseBehaviour() noexcept;
 
 	BaseBehaviour(const BaseBehaviour& toCopy) noexcept = delete;
-	BaseBehaviour(BaseBehaviour&& toMove) noexcept = delete;
+	BaseBehaviour(BaseBehaviour&& toMove) noexcept;
 	BaseBehaviour& operator=(const BaseBehaviour& toCopy) noexcept = delete;
-	BaseBehaviour& operator=(BaseBehaviour&& toMove) noexcept = delete;
+	BaseBehaviour& operator=(BaseBehaviour&& toMove) noexcept;
 
 	virtual void Update(double deltaTime) = 0;
+	void setParent(Object3d& parent);
 
 };
 

@@ -10,7 +10,7 @@ class Object3d
 private:
 	Matrix3d position;
 	Mesh* mesh;
-	std::vector<BaseBehaviour> behaviours;
+	std::vector<std::unique_ptr<BaseBehaviour>> behaviours;
 
 public:
 
@@ -31,7 +31,7 @@ public:
 	Mesh& getMesh();
 	void setMesh(const Mesh& newMesh);
 
-	void addBehaviour(BaseBehaviour& newBehaviour);
+	void addBehaviour(std::unique_ptr<BaseBehaviour> newBehaviour);
 	void update(double deltaTime);
 };
 

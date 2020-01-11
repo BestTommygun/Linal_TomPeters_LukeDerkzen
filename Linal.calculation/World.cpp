@@ -73,8 +73,7 @@ Object3d World::makeCube(Vector3d position)
 	Object3d object3d = Object3d();
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
-	PulseBehaviour behaviour = PulseBehaviour(object3d);
-	object3d.addBehaviour(behaviour);
+	object3d.addBehaviour(std::make_unique<PulseBehaviour>(object3d));
 
 	return object3d;
 }
@@ -94,9 +93,9 @@ void World::prepareWorld()
 	//make objects here
 	camera = new Camera(Vector3d(0, 0, 0), 90, 1, 100);
 
-	worldObjects.push_back(makeCube(Vector3d(0, 0, 10)));
-	worldObjects.push_back(makeCube(Vector3d(0, 0, 5)));
-	worldObjects.push_back(makeCube(Vector3d(-10, 0, 2)));
+	worldObjects.push_back(std::move(makeCube(Vector3d(0, 0, 10))));
+	worldObjects.push_back(std::move(makeCube(Vector3d(0, 0, 5))));
+	worldObjects.push_back(std::move(makeCube(Vector3d(-10, 0, 2))));
 }
 
 void World::moveCamera(Vector3d movement)

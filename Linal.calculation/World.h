@@ -20,8 +20,8 @@ public:
 
 	Camera& getCamera() const;
 
-	std::vector<Object3d> getWorldObjects() {
-		return worldObjects;
+	std::vector<Object3d>* getWorldObjects() {
+		return &worldObjects;
 	}
 };
 

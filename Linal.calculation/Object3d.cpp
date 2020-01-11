@@ -12,6 +12,12 @@ Object3d::Object3d(Object3d&& toMove) noexcept
 	this->mesh = toMove.mesh;
 	toMove.mesh = nullptr;
 	this->position = toMove.position;
+	this->behaviours = std::move(toMove.behaviours);
+
+	size_t behavioursSize = this->behaviours.size();
+	for (size_t i = 0; i < behavioursSize; i++) {
+		this->behaviours[i]->setParent(*this);
+	}
 }
 
 Object3d::Object3d(const Vector3d& newPosition)
@@ -44,6 +50,12 @@ Object3d& Object3d::operator=(Object3d&& toMove) noexcept
 		this->mesh = toMove.mesh;
 		toMove.mesh = nullptr;
 		this->position = toMove.position;
+		this->behaviours = std::move(toMove.behaviours);
+
+		size_t behavioursSize = this->behaviours.size();
+		for (size_t i = 0; i < behavioursSize; i++) {
+			this->behaviours[i]->setParent(*this);
+		}
 	}
 	return *this;
 }
@@ -76,15 +88,15 @@ void Object3d::setMesh(const Mesh& newMesh) {
 	mesh = new Mesh(newMesh);
 }
 
-void Object3d::addBehaviour(BaseBehaviour& newBehaviour)
+void Object3d::addBehaviour(std::unique_ptr<BaseBehaviour> newBehaviour)
 {
-	behaviours.push_back(newBehaviour);
+	behaviours.push_back(std::move(newBehaviour));
 }
 
 void Object3d::update(double deltaTime)
 {
-	size_t behavioursSize = behaviours.size();
+	size_t behavioursSize = this->behaviours.size();
 	for (size_t i = 0; i < behavioursSize; i++) {
-		behaviours[i].Update(deltaTime);
+		behaviours[i]->Update(deltaTime);
 	}
 }

@@ -1,6 +1,6 @@
 #include "PulseBehaviour.h"
 
-PulseBehaviour::PulseBehaviour(Object3d parent) :
+PulseBehaviour::PulseBehaviour(Object3d& parent) :
 	BaseBehaviour(parent)
 {
 }
@@ -12,7 +12,6 @@ PulseBehaviour::~PulseBehaviour()
 PulseBehaviour::PulseBehaviour(PulseBehaviour&& toMove) noexcept :
 	BaseBehaviour(*toMove.parent)
 {
-	toMove.parent = nullptr;
 	this->prevScale = toMove.prevScale;
 }
 
