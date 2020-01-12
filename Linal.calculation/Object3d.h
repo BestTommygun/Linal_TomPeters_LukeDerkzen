@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include "Mesh.h"
+#include "BoundingBox.h"
 #include "Data/Vector3d.h"
 #include "Behaviours/BaseBehaviour.h"
 
@@ -10,6 +11,7 @@ class Object3d
 protected:
 	Mesh* mesh;
 	Matrix3d position;
+	BoundingBox* boundingBox;
 	bool shouldDestroy;
 	double coolDowntimer;
 	std::vector<std::unique_ptr<BaseBehaviour>> behaviours;
@@ -18,6 +20,7 @@ public:
 
 	Object3d() : Object3d(Vector3d(0, 0, 0)) {};
 	Object3d(const Vector3d& newPosition);
+	Object3d(const Matrix3d& newPosition);
 	~Object3d();
 
 	Object3d(const Object3d& toCopy) noexcept;
@@ -42,6 +45,9 @@ public:
 
 	void setCoolDownTimer(const double newCoolDownTimer);
 	const double getCoolDowntimer() const;
+	void setBoundingBox(BoundingBox newRoughHitbox);
+	const BoundingBox& getBoundingBox() const;
+	bool intersects(Vector3d point1, Vector3d point2);
 
 	void addBehaviour(std::unique_ptr<BaseBehaviour> newBehaviour);
 	void update(double deltaTime);

@@ -64,7 +64,9 @@ Object3d PlayerObject::getPrefab()
 {
 	if (cooldownTimer <= 0) {
 		cooldownTimer = reloadSpeed;
-		Object3d bullet = Object3d(this->getPosition().getPosition() + this->getPosition().getFrontDirection());
+		Matrix3d bulletPosition = Matrix3d(this->getPosition());
+		bulletPosition = bulletPosition * (this->getPosition().getFrontDirection() * 2);
+		Object3d bullet = Object3d(bulletPosition);
 
 		std::vector<Vector3d> vertexes = std::vector<Vector3d>();
 		vertexes.push_back(Vector3d(-0.5, -0.5, -0.5));
@@ -133,7 +135,10 @@ Object3d PlayerObject::getPrefab()
 		triangles.push_back(7);
 
 		Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
-		bullet.setMesh(cubeMesh);
+		BoundingBox cubeHitBox = BoundingBox(Vector3d(-2.0, -2.0, -3.0), Vector3d(2.0, 2.0, 2.0));
+
+		bullet.setMesh(cubeMesh); 
+		bullet.setBoundingBox(cubeHitBox);
 		bullet.addBehaviour(std::make_unique<RotationBehaviour>(bullet, RotationDirection::Z, 4));
 		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, 0.5));
 

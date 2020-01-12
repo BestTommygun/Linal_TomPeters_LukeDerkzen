@@ -38,7 +38,7 @@ Vector3d Vector3d::normalize() const
 	return Vector3d(x, y, z);
 }
 
-Vector3d Vector3d::crossProduct(Vector3d& vec) const {
+Vector3d Vector3d::outProduct(Vector3d& vec) const {
 
 	double newX = (vec.y * this->z) - (vec.z * this->y);
 	double newY = (vec.z * this->x) - (vec.x * this->z);
@@ -47,7 +47,7 @@ Vector3d Vector3d::crossProduct(Vector3d& vec) const {
 	return Vector3d(newX, newY, newZ);
 }
 
-double Vector3d::dot(Vector3d& vec) const
+double Vector3d::inProduct(Vector3d& vec) const
 {
 	double x = this->x * vec.x;
 	double y = this->y * vec.y;
@@ -138,6 +138,20 @@ void Vector3d::operator/=(const Vector3d& other)
 	this->x /= other.x;
 	this->y /= other.y;
 	this->z /= other.z;
+}
+
+bool Vector3d::operator>(const Vector3d& other) const
+{
+	if (other.x > this->x && other.y > this->y && other.z > this->z)
+		return false;
+	return true;
+}
+
+bool Vector3d::operator<(const Vector3d& other) const
+{
+	if (other.x < this->x && other.y < this->y && other.z < this->z)
+		return false;
+	return true;
 }
 
 Vector3d::operator Vector2d()

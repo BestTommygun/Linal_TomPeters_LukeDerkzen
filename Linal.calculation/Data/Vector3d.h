@@ -20,8 +20,8 @@ struct Vector3d
 
 	double length() const;
 	Vector3d normalize() const;
-	Vector3d crossProduct(Vector3d& vec) const;
-	double dot(Vector3d& vec) const;
+	Vector3d outProduct(Vector3d& vec) const;
+	double inProduct(Vector3d& vec) const;
 	Vector3d operator+(const Vector3d& other) const;
 	void operator+=(const Vector3d& other);
 	Vector3d operator-(const Vector3d& other) const;
@@ -33,6 +33,8 @@ struct Vector3d
 	void operator*=(const double& other);
 	Vector3d operator/(const Vector3d& other) const;
 	void operator/=(const Vector3d& other);
+	bool operator>(const Vector3d& other) const;
+	bool operator<(const Vector3d& other) const;
 	explicit operator Vector2d();
 };
 

@@ -7,7 +7,7 @@ Object3d::Object3d(const Object3d& toCopy) noexcept
 	this->position = toCopy.position;
 	this->shouldDestroy = toCopy.shouldDestroy;
 	this->coolDowntimer = toCopy.coolDowntimer;
-
+	this->boundingBox = new BoundingBox(*toCopy.boundingBox);
 }
 
 Object3d::Object3d(Object3d&& toMove) noexcept
@@ -18,6 +18,8 @@ Object3d::Object3d(Object3d&& toMove) noexcept
 	this->behaviours = std::move(toMove.behaviours);
 	this->coolDowntimer = toMove.coolDowntimer;
 	this->shouldDestroy = toMove.shouldDestroy;
+	this->boundingBox = toMove.boundingBox;
+	toMove.boundingBox = nullptr;
 
 	size_t behavioursSize = this->behaviours.size();
 	for (size_t i = 0; i < behavioursSize; i++) {
@@ -29,13 +31,26 @@ Object3d::Object3d(const Vector3d& newPosition) :
 	position{ Matrix3d(newPosition) },
 	mesh{ new Mesh() },
 	shouldDestroy{ false },
-	coolDowntimer{ 0.0 }
+	coolDowntimer{ 0.0 },
+	boundingBox{ nullptr }
 { }
+
+Object3d::Object3d(const Matrix3d& newPosition) :
+	position{ Matrix3d(newPosition) },
+	mesh{ new Mesh() },
+	shouldDestroy{ false },
+	coolDowntimer{ 0.0 },
+	boundingBox{ nullptr }
+{
+}
 
 Object3d::~Object3d()
 {
 	delete mesh;
 	mesh = nullptr;
+
+	delete boundingBox;
+	boundingBox = nullptr;
 }
 
 Object3d& Object3d::operator=(const Object3d& toCopy) noexcept
@@ -47,6 +62,7 @@ Object3d& Object3d::operator=(const Object3d& toCopy) noexcept
 		this->position = toCopy.position;
 		this->coolDowntimer = toCopy.coolDowntimer;
 		this->shouldDestroy = toCopy.shouldDestroy;
+		this->boundingBox = new BoundingBox(*toCopy.boundingBox);
 
 	}
 	return *this;
@@ -62,6 +78,8 @@ Object3d& Object3d::operator=(Object3d&& toMove) noexcept
 		this->behaviours = std::move(toMove.behaviours);
 		this->coolDowntimer = toMove.coolDowntimer;
 		this->shouldDestroy = toMove.shouldDestroy;
+		this->boundingBox = toMove.boundingBox;
+		toMove.boundingBox = nullptr;
 
 		size_t behavioursSize = this->behaviours.size();
 		for (size_t i = 0; i < behavioursSize; i++) {
@@ -74,6 +92,9 @@ Object3d& Object3d::operator=(Object3d&& toMove) noexcept
 void Object3d::move(const Matrix3d& translationMatrix)
 {
 	position = position * translationMatrix;
+	if (boundingBox != nullptr) {
+		boundingBox->move(translationMatrix);
+	}
 }
 
 const Matrix3d& Object3d::getPosition() const
@@ -104,7 +125,7 @@ void Object3d::rotateAroundZ(double radAngle)
 const Mesh& Object3d::getMesh() const {
 	return *mesh;
 }
-Mesh& Object3d::getMesh()
+Mesh& Object3d::getMesh() 
 {
 	return *mesh;
 }
@@ -137,6 +158,25 @@ void Object3d::setCoolDownTimer(const double newCoolDownTimer)
 const double Object3d::getCoolDowntimer() const
 {
 	return coolDowntimer;
+}
+
+void Object3d::setBoundingBox(BoundingBox newRoughHitbox)
+{
+	delete boundingBox;
+	boundingBox = nullptr;
+	this->boundingBox = new BoundingBox(newRoughHitbox);
+}
+
+const BoundingBox& Object3d::getBoundingBox() const
+{
+	return *this->boundingBox;
+}
+
+bool Object3d::intersects(Vector3d point1, Vector3d point2)
+{
+	if(boundingBox != nullptr)
+		return boundingBox->intersects(point1, point2);
+	return false;
 }
 
 void Object3d::addBehaviour(std::unique_ptr<BaseBehaviour> newBehaviour)

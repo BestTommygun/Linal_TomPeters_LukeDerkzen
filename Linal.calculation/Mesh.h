@@ -4,6 +4,7 @@
 #include "Data/Vector3d.h"
 
 // when making a mesh keep in mind that the parent object sees 0, 0, 0 as its center
+class Object3d;
 class Mesh
 {
 private: 
@@ -29,4 +30,10 @@ public:
     const size_t* getTriangles() const;
     const std::vector<Vector3d>& getVertexes() const;
     void setVertexes(const std::vector<Vector3d>& newVertexes);
+
+    /// <summary> checks all mesh vertexes for this and other mesh </summary>
+    bool checkCollisionDetailed(Object3d& thisMesh, Object3d& otherMesh);
+    bool doesLineIntersect(const Vector3d& P1, const Vector3d& P2, const Vector3d& A, const Vector3d& B, const Vector3d& C);
 };
+
+#include "Object3d.h"

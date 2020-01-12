@@ -8,6 +8,7 @@ Renderer::Renderer(Camera& camera) :
 
 System::Collections::Generic::List<RenderLine>^ Renderer::calculateFrame(const std::vector<std::unique_ptr<Object3d>>& toRenderObjects, double screenWidth, double screenHeight)
 {
+	//get the projection
 	Matrix3d camMatrix = this->camera.getMatrix();
 	Vector3d cameraTarget = camMatrix.getPosition() - camMatrix.getBackDirection();
 	Matrix3d lookAtMatrix = Matrix3d::createLookAt(camMatrix.getPosition(), cameraTarget, Vector3d::yAxis);

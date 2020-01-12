@@ -157,14 +157,36 @@ Vector3d Matrix3d::getBackDirection() const
 Matrix3d Matrix3d::createLookAt(Vector3d cameraPosition, Vector3d cameraTarget, Vector3d cameraUpVector)
 {
 	Vector3d vector = (cameraPosition - cameraTarget).normalize();
-	Vector3d vector2 = cameraUpVector.crossProduct(vector).normalize();
-	Vector3d vector3 = vector.crossProduct(vector2);
+	Vector3d vector2 = cameraUpVector.outProduct(vector).normalize();
+	Vector3d vector3 = vector.outProduct(vector2);
 
 	return Matrix3d(
 		vector2.x, vector3.x, vector.x, 0.0,
 		vector2.y, vector3.y, vector.y, 0.0,
 		vector2.z, vector3.z, vector.z, 0.0,
-		-vector2.dot(cameraPosition), -vector3.dot(cameraPosition), -vector.dot(cameraPosition), 1.0);
+		-vector2.inProduct(cameraPosition), -vector3.inProduct(cameraPosition), -vector.inProduct(cameraPosition), 1.0);
+}
+/*
+Matrix3d& Matrix3d::createRotateMatrix(const double scale, const double m33, const double m43)
+{
+	return Matrix3d(
+		scale, 0, 0, 0,
+		0, scale, 0, 0,
+		0, 0, m33, m43,
+		0, 0, -1, 0
+	);
+}
+*/
+Matrix3d& Matrix3d::createScaleMatrix(const double scale)
+{
+	Matrix3d returnMatrix = Matrix3d();
+	return returnMatrix;
+}
+
+Matrix3d& Matrix3d::createTransMatrix(const double scale)
+{
+	Matrix3d returnMatrix = Matrix3d();
+	return returnMatrix;
 }
 
 Matrix3d& Matrix3d::invertMatrix(Matrix3d toInvert)

@@ -42,9 +42,6 @@
     <ClCompile Include="Data\Matrix3d.cpp">
       <Filter>Source Files\data</Filter>
     </ClCompile>
-    <ClCompile Include="Data\Transform.cpp">
-      <Filter>Source Files\data</Filter>
-    </ClCompile>
     <ClCompile Include="Data\Vector2d.cpp">
       <Filter>Source Files\data</Filter>
     </ClCompile>
@@ -78,6 +75,9 @@
     <ClCompile Include="Behaviours\VelocityBehaviour.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h">
@@ -87,9 +87,6 @@
       <Filter>Header Files\data</Filter>
     </ClInclude>
     <ClInclude Include="Data\Vector2d.h">
-      <Filter>Header Files\data</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\Transform.hpp">
       <Filter>Header Files\data</Filter>
     </ClInclude>
     <ClInclude Include="Data\Matrix3d.h">
@@ -124,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Behaviours\VelocityBehaviour.h">
       <Filter>Header Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

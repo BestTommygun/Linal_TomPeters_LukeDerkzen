@@ -69,8 +69,10 @@ PlayerObject World::makePlayer(Vector3d position)
 	triangles.push_back(7);
 
 	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
+	BoundingBox cubeHitBox = BoundingBox(Vector3d(-3.0, -3.0, -3.0), Vector3d(3.0, 3.0, 3.0));
 
 	PlayerObject object3d = PlayerObject(Vector3d(0.0, 0.0, 0.0), 1);
+	object3d.setBoundingBox(cubeHitBox);
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
 
@@ -146,15 +148,20 @@ Object3d World::makeCube(Vector3d position)
 	triangles.push_back(7);
 
 	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
+	BoundingBox cubeHitBox = BoundingBox(Vector3d(-3.0, -3.0, -3.0), Vector3d(3.0, 3.0, 3.0));
 
 	Object3d object3d = Object3d(Vector3d(0.5, 0.5, 0.5));
+	object3d.setBoundingBox(cubeHitBox);
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
-	object3d.addBehaviour(std::make_unique<PulseBehaviour>(object3d, 2, 1, 0.01));
-	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::X, 1));
+	
+	//object3d.addBehaviour(std::make_unique<PulseBehaviour>(object3d, 2, 1, 0.01));
+	
+	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Y, 1));
+	/*
 	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Y, 1));
 	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Z, 1));
-
+	*/
 	return object3d;
 }
 
@@ -171,10 +178,10 @@ World::~World()
 void World::prepareWorld()
 {
 	//make objects here
-	camera = new Camera(Vector3d(0, 0, 0), 90, 1, 100);
+	camera = new Camera(Vector3d(0, 0, -10), 170, 1, 750);
 
-	worldObjects.push_back(std::make_unique<PlayerObject>(std::move(makePlayer(Vector3d(-10, -3, 2)))));
-	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 5, 10)))));
+	worldObjects.push_back(std::make_unique<PlayerObject>(std::move(makePlayer(Vector3d(0, 2, 10)))));
+	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(-5, 5, 10)))));
 	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 0, 5)))));
 	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(-10, -3, 2)))));
 }
