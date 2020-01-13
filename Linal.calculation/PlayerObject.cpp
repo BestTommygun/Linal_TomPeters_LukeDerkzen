@@ -70,24 +70,24 @@ Object3d PlayerObject::getProjectilePrefab()
 
 		std::vector<Vector3d> vertexes = std::vector<Vector3d>();
 		vertexes.push_back(Vector3d(0, 0, 0));
-		vertexes.push_back(Vector3d(0.186522,-0.186522,0.081164  ));
-		vertexes.push_back(Vector3d(0.186522,-0.186522,0.567348  ));
-		vertexes.push_back(Vector3d(-0.186522,-0.186522,0.567347 ));
-		vertexes.push_back(Vector3d(-0.186522,-0.186522,0.081164 ));
-		vertexes.push_back(Vector3d(0.186522,0.186522,0.081164	 ));
-		vertexes.push_back(Vector3d(0.186522,0.186522,0.567348	 ));
-		vertexes.push_back(Vector3d(-0.186522,0.186522,0.567347  ));
-		vertexes.push_back(Vector3d(-0.186522,0.186522,0.081164  ));
-		vertexes.push_back(Vector3d(0.000000,-0.250000,-0.117982 ));
-		vertexes.push_back(Vector3d(0.000000,-0.250000,0.572605  ));
-		vertexes.push_back(Vector3d(0.000000,0.250000,-0.117982  ));
-		vertexes.push_back(Vector3d(-0.000000,0.250000,0.572605  ));
-		vertexes.push_back(Vector3d(0.250000,0.000000,-0.117982  ));
-		vertexes.push_back(Vector3d(0.250000,0.000000,0.572605	 ));
-		vertexes.push_back(Vector3d(-0.250000,0.000000,0.572605  ));
-		vertexes.push_back(Vector3d(-0.250000,0.000000,-0.117982 ));
-		vertexes.push_back(Vector3d(0.000000,0.000000,-1.085191  ));
-		vertexes.push_back(Vector3d(-0.000000,0.000000,0.572605  ));
+		vertexes.push_back(Vector3d(0.186522,0.186522,0.252910));
+		vertexes.push_back(Vector3d(0.186522,0.186522,-0.739093));
+		vertexes.push_back(Vector3d(-0.186522,0.186522,-0.739093));
+		vertexes.push_back(Vector3d(-0.186522,0.186522,-0.252909));
+		vertexes.push_back(Vector3d(0.186522,-0.186522,-0.252910));
+		vertexes.push_back(Vector3d(0.186522,-0.186522,-0.739093));
+		vertexes.push_back(Vector3d(-0.186522,-0.186522,-0.739093));
+		vertexes.push_back(Vector3d(-0.186522,-0.186522,-0.252910));
+		vertexes.push_back(Vector3d(0.000000,0.250000,-0.053764));
+		vertexes.push_back(Vector3d(0.000000,0.250000,-0.744351));
+		vertexes.push_back(Vector3d(0.000000,-0.250000,-0.053764));
+		vertexes.push_back(Vector3d(-0.000000,-0.250000,-0.744351));
+		vertexes.push_back(Vector3d(0.250000,-0.000000,-0.053764));
+		vertexes.push_back(Vector3d(0.250000,0.000000,-0.744351));
+		vertexes.push_back(Vector3d(-0.250000,0.000000,-0.744351));
+		vertexes.push_back(Vector3d(-0.250000,-0.000000,-0.053764));
+		vertexes.push_back(Vector3d(0.000000,-0.000000,0.913445));
+		vertexes.push_back(Vector3d(-0.000000,0.000000,-0.744351));
 
 		std::vector<size_t> triangles = std::vector<size_t>();
 
@@ -225,7 +225,7 @@ Object3d PlayerObject::getProjectilePrefab()
 		bullet.setMesh(cubeMesh);
 		bullet.setBoundingBox(cubeHitBox);
 		bullet.addBehaviour(std::make_unique<RotationBehaviour>(bullet, RotationDirection::Z, 4)); 
-		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, this->velocity.z + 0.5));//TODO: make speed dependent on parent
+		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, this->velocity.length() + 0.5));
    		return bullet;
 	}
 	else {
