@@ -48,7 +48,6 @@ PlayerObject World::makePlayer(Vector3d position)
 	vertexes.push_back(Vector3d(-0.606506,-0.374150,-2.292157));
 
 	std::vector<size_t> triangles = std::vector<size_t>();
-	//front side
 	triangles.push_back(16);
 	triangles.push_back(2);
 	triangles.push_back(6);
@@ -57,7 +56,6 @@ PlayerObject World::makePlayer(Vector3d position)
 	triangles.push_back(4);
 	triangles.push_back(14);
 
-	//left side
 	triangles.push_back(18);
 	triangles.push_back(4);
 	triangles.push_back(8);
@@ -66,7 +64,6 @@ PlayerObject World::makePlayer(Vector3d position)
 	triangles.push_back(9);
 	triangles.push_back(10);
 
-	//top side
 	triangles.push_back(17);
 	triangles.push_back(9);
 	triangles.push_back(10);
@@ -75,7 +72,6 @@ PlayerObject World::makePlayer(Vector3d position)
 	triangles.push_back(3);
 	triangles.push_back(9);
 
-	//bottom side
 	triangles.push_back(8);
 	triangles.push_back(7);
 	triangles.push_back(10);
@@ -84,7 +80,6 @@ PlayerObject World::makePlayer(Vector3d position)
 	triangles.push_back(15);
 	triangles.push_back(13);
 
-	//right side
 	triangles.push_back(16);
 	triangles.push_back(3);
 	triangles.push_back(11);
@@ -93,7 +88,6 @@ PlayerObject World::makePlayer(Vector3d position)
 	triangles.push_back(6);
 	triangles.push_back(2);
 
-	//back side
 	triangles.push_back(17);
 	triangles.push_back(5);
 	triangles.push_back(13);
@@ -384,17 +378,13 @@ PlayerObject World::makePlayer(Vector3d position)
 
 
 
-	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
+	Mesh cubeMesh = Mesh(vertexes, triangles);
 	BoundingBox cubeHitBox = BoundingBox(Vector3d(-4.5, -4.5, -4.5), Vector3d(2.0, 2.0, 2.0));
 
 	PlayerObject object3d = PlayerObject(Vector3d(0.0, 0.0, 0.0), 1);
 	object3d.setBoundingBox(cubeHitBox);
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
-
-	//original blender object is rotated so rotate it back
-	//object3d.rotateAroundY((-90 / 360.0) * 2.0 * PI);
-	//object3d.rotateAroundZ((180 / 360.0) * 2.0 * PI);
 
 	return object3d;
 }
@@ -413,7 +403,6 @@ TargetObject World::makeTarget(Vector3d position)
 	vertexes.push_back(Vector3d(1.0, 1.0, 1.0));
 
 	std::vector<size_t> triangles = std::vector<size_t>();
-	//front side
 	triangles.push_back(0);
 	triangles.push_back(1);
 	triangles.push_back(2);
@@ -422,7 +411,6 @@ TargetObject World::makeTarget(Vector3d position)
 	triangles.push_back(2);
 	triangles.push_back(3);
 
-	//left side
 	triangles.push_back(0);
 	triangles.push_back(4);
 	triangles.push_back(2);
@@ -431,7 +419,6 @@ TargetObject World::makeTarget(Vector3d position)
 	triangles.push_back(6);
 	triangles.push_back(4);
 
-	//top side
 	triangles.push_back(2);
 	triangles.push_back(3);
 	triangles.push_back(6);
@@ -440,7 +427,6 @@ TargetObject World::makeTarget(Vector3d position)
 	triangles.push_back(3);
 	triangles.push_back(7);
 
-	//bottom side
 	triangles.push_back(0);
 	triangles.push_back(1);
 	triangles.push_back(4);
@@ -449,7 +435,6 @@ TargetObject World::makeTarget(Vector3d position)
 	triangles.push_back(4);
 	triangles.push_back(5);
 
-	//right side
 	triangles.push_back(1);
 	triangles.push_back(3);
 	triangles.push_back(5);
@@ -458,7 +443,6 @@ TargetObject World::makeTarget(Vector3d position)
 	triangles.push_back(5);
 	triangles.push_back(7);
 
-	//back side
 	triangles.push_back(4);
 	triangles.push_back(5);
 	triangles.push_back(6);
@@ -467,7 +451,7 @@ TargetObject World::makeTarget(Vector3d position)
 	triangles.push_back(6);
 	triangles.push_back(7);
 
-	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
+	Mesh cubeMesh = Mesh(vertexes, triangles);
 	BoundingBox cubeHitBox = BoundingBox(Vector3d(-1.5, -1.5, -1.5), Vector3d(1.5, 1.5, 1.5));
 
 	TargetObject object3d = TargetObject(Vector3d(0.5, 0.5, 0.5));
@@ -497,7 +481,6 @@ Object3d World::makeCube(Vector3d position)
 	vertexes.push_back(Vector3d(1.0,  1.0,  1.0));
 
 	std::vector<size_t> triangles = std::vector<size_t>();
-	//front side
 	triangles.push_back(0);
 	triangles.push_back(1);
 	triangles.push_back(2);
@@ -506,7 +489,6 @@ Object3d World::makeCube(Vector3d position)
 	triangles.push_back(2);
 	triangles.push_back(3);
 
-	//left side
 	triangles.push_back(0);
 	triangles.push_back(4);
 	triangles.push_back(2);
@@ -515,7 +497,6 @@ Object3d World::makeCube(Vector3d position)
 	triangles.push_back(6);
 	triangles.push_back(4);
 
-	//top side
 	triangles.push_back(2);
 	triangles.push_back(3);
 	triangles.push_back(6);
@@ -524,7 +505,6 @@ Object3d World::makeCube(Vector3d position)
 	triangles.push_back(3);
 	triangles.push_back(7);
 
-	//bottom side
 	triangles.push_back(0);
 	triangles.push_back(1);
 	triangles.push_back(4);
@@ -533,7 +513,6 @@ Object3d World::makeCube(Vector3d position)
 	triangles.push_back(4);
 	triangles.push_back(5);
 
-	//right side
 	triangles.push_back(1);
 	triangles.push_back(3);
 	triangles.push_back(5);
@@ -542,7 +521,6 @@ Object3d World::makeCube(Vector3d position)
 	triangles.push_back(5);
 	triangles.push_back(7);
 
-	//back side
 	triangles.push_back(4);
 	triangles.push_back(5);
 	triangles.push_back(6);
@@ -551,7 +529,7 @@ Object3d World::makeCube(Vector3d position)
 	triangles.push_back(6);
 	triangles.push_back(7);
 
-	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
+	Mesh cubeMesh = Mesh(vertexes, triangles);
 	BoundingBox cubeHitBox = BoundingBox(Vector3d(-1.5, -1.5, -1.5), Vector3d(1.5, 1.5, 1.5));
 
 	Object3d object3d = Object3d(Vector3d(0.5, 0.5, 0.5));
@@ -579,12 +557,11 @@ World::~World()
 
 void World::prepareWorld()
 {
-	//make objects here
 	camera = new Camera(Vector3d(0, -2, -10), 175, 1, 100);
 
 	worldObjects.push_back(std::make_unique<PlayerObject>(std::move(makePlayer(Vector3d(0, 0, 2)))));
-	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(4, 4, 10)))));
-	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 0, 5)))));
+	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(8, 4, 10)))));
+	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(-16, 0, 0)))));
 	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(-10, -3, 2)))));
 	worldObjects.push_back(std::make_unique<TargetObject>(std::move(makeTarget(Vector3d(-10, -10, 10)))));
 }

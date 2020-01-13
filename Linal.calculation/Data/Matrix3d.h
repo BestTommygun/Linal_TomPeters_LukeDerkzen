@@ -35,9 +35,6 @@ public:
 	Vector3d getBackDirection() const;
 
 	static Matrix3d createLookAt(Vector3d cameraPosition, Vector3d cameraTarget, Vector3d cameraUpVector);
-	//static Matrix3d& createRotateMatrix(const double scale, const double m33, const double m43);
-	static Matrix3d& createScaleMatrix(const double scale);
-	static Matrix3d& createTransMatrix(const double scale);
 	static Matrix3d& invertMatrix(Matrix3d toInvert);
 	void rotateAroundXAxis(double radAngle);
 	void rotateAroundYAxis(double radAngle);

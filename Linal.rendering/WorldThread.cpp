@@ -6,7 +6,7 @@ void WorldThread::checkCollisions()
 {
 	std::vector<std::unique_ptr<Object3d>>& worldObjectsCopy = world->getWorldObjects();
 	size_t worldObjectsSize = worldObjectsCopy.size();
-	for (size_t i = 0; i < worldObjectsSize; i++) { // if performance becomes an issue this should be replaced with a call each object in Update();
+	for (size_t i = 0; i < worldObjectsSize; i++) { // if performance becomes an issue this can be replaced with a call each object in Update();, this eliminates one loop
 		auto& curObjectI = worldObjectsCopy[i];
 
 		for (size_t j = i + 1; j < worldObjectsSize; j++) {
@@ -18,7 +18,7 @@ void WorldThread::checkCollisions()
 					//since we know these objects have a chance of intersecting we now send them to the (expensive/slow) collision check
 					
 					if (curObjectI->getMesh().checkCollisionDetailed(*curObjectI.get(), *curObjectJ.get())) {
-						//detailed collision has registered an hit
+						//detailed collision has registered an hit so we mark both objects to be deleted in the next update
 						curObjectI->markForDestruction();
 						curObjectJ->markForDestruction();
 					}
@@ -67,8 +67,10 @@ void WorldThread::run() {
 
 	while (_isRunning) {
 		try {
+			//calculate new deltaTime
 			deltaTime = System::DateTime::UtcNow - prevTime;
 			prevTime = System::DateTime::UtcNow;
+
 			//handle inputs
 			if(mainView->KeysPressed->Count > 0)
 				handleInputs(mainView->KeysPressed->Dequeue());
@@ -187,9 +189,6 @@ void WorldThread::handleInputs(System::Char input)
 	case ' ':
 		if (world->getPlayerObject() != nullptr)
 			world->addWorldObject(std::move(world->getPlayerObject()->get()->getProjectilePrefab()));
-		break;
-	case 't':
-		std::cout << "this should enable debug mode which shows us the axis of everything\n";
 		break;
 	default:
 		break;

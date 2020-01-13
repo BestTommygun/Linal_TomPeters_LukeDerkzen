@@ -3,12 +3,15 @@
 
 void View::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 {
+	//drawing lines
 	for (size_t i = 0; i < _toDrawLines->Count; i++) {
 		auto& curLine = _toDrawLines[i];
 		auto points = curLine.getPoints();
 
 		e->Graphics->DrawLine(System::Drawing::Pens::Red, points->Item1, points->Item2);
 	}
+
+	//drawing of lost / won message
 	System::Drawing::Font^ font = nullptr;
 	try {
 		font = gcnew System::Drawing::Font(gcnew System::String("Arial"), 14.0f);

@@ -175,6 +175,7 @@ void Object3d::setBoundingBox(BoundingBox newRoughHitbox)
 {
 	delete boundingBox;
 	boundingBox = nullptr;
+
 	//calculate offset aswell
 	Vector3d point1 = newRoughHitbox.getPoints().first;
 	Vector3d point2 = newRoughHitbox.getPoints().second;

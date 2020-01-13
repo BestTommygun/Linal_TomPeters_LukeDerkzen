@@ -61,14 +61,8 @@ void PulseBehaviour::Update(double deltatime)
 		0, 0, scale, 0,
 		0,  0,  0,   1
 	);
-	
-	//what to do now:
-	//do the inverse of the prev transformation
-	//now u have the start pos
-	//now do the next transformation
-	//prev = next
-	//this is done to prevent layering transformations, keeping calculations fairly "clean"
-
+	//the previous scale is saved so we only do a revert and a scale
+	//the alternative would be layering scales on top of eachother giving us ugly numbers
 	prevScale = Matrix3d::invertMatrix(prevScale);
 
 	std::vector<Vector3d> updatedVertexes;

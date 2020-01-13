@@ -33,6 +33,7 @@ public:
 
     /// <summary> checks all mesh vertexes for this and other mesh </summary>
     bool checkCollisionDetailed(Object3d& thisMesh, Object3d& otherMesh);
+    /// <summary> checks if the specific line (P1, P2) intersects triangle ABC
     bool doesLineIntersect(const Vector3d& P1, const Vector3d& P2, const Vector3d& A, const Vector3d& B, const Vector3d& C);
 };
 

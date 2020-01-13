@@ -166,28 +166,6 @@ Matrix3d Matrix3d::createLookAt(Vector3d cameraPosition, Vector3d cameraTarget, 
 		vector2.z, vector3.z, vector.z, 0.0,
 		-vector2.inProduct(cameraPosition), -vector3.inProduct(cameraPosition), -vector.inProduct(cameraPosition), 1.0);
 }
-/*
-Matrix3d& Matrix3d::createRotateMatrix(const double scale, const double m33, const double m43)
-{
-	return Matrix3d(
-		scale, 0, 0, 0,
-		0, scale, 0, 0,
-		0, 0, m33, m43,
-		0, 0, -1, 0
-	);
-}
-*/
-Matrix3d& Matrix3d::createScaleMatrix(const double scale)
-{
-	Matrix3d returnMatrix = Matrix3d();
-	return returnMatrix;
-}
-
-Matrix3d& Matrix3d::createTransMatrix(const double scale)
-{
-	Matrix3d returnMatrix = Matrix3d();
-	return returnMatrix;
-}
 
 Matrix3d& Matrix3d::invertMatrix(Matrix3d toInvert)
 {
@@ -209,6 +187,7 @@ Matrix3d& Matrix3d::invertMatrix(Matrix3d toInvert)
 		b09 = a21 * a32 - a22 * a31,
 		b10 = a21 * a33 - a23 * a31,
 		b11 = a22 * a33 - a23 * a32;
+
 		// Calculate the determinant
 		double d = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
 

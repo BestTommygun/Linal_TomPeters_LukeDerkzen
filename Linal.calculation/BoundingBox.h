@@ -17,6 +17,11 @@ public:
 	BoundingBox& operator=(const BoundingBox& toCopy) noexcept;
 	BoundingBox& operator=(BoundingBox&& toMove) noexcept;
 
+	/// <summary> 
+	/// this compares point1 and point2 to the internal point1 and point2 and returns wether they intersect
+	/// </summary>
+	/// <param name="point1"> the bottom left closest back point </param>
+	/// <param name="point2"> the top right furthest back point </param>
 	bool intersects(Vector3d point1, Vector3d point2);
 	void move(const Matrix3d& translationMatrix);
 

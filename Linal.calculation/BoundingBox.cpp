@@ -36,7 +36,7 @@ BoundingBox& BoundingBox::operator=(BoundingBox&& toMove) noexcept
 
 bool BoundingBox::intersects(Vector3d point1, Vector3d point2)
 {
-	bool test = (
+	bool intersects = (
 		(
 			this->points.first.x < point1.x     && this->points.second.x > point1.x
 			|| this->points.first.x < point2.x  && this->points.second.x > point2.x
@@ -58,7 +58,7 @@ bool BoundingBox::intersects(Vector3d point1, Vector3d point2)
 			|| point1.z < this->points.second.z && point2.z >this->points.second.z
 			)
 		);
-	return test;
+	return intersects;
 }
 
 void BoundingBox::move(const Matrix3d& translationMatrix)
