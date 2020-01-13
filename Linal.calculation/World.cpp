@@ -385,7 +385,7 @@ PlayerObject World::makePlayer(Vector3d position)
 
 
 	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
-	BoundingBox cubeHitBox = BoundingBox(Vector3d(-1.5, -1.5, -1.5), Vector3d(1.5, 1.5, 1.5));
+	BoundingBox cubeHitBox = BoundingBox(Vector3d(-4.5, -4.5, -4.5), Vector3d(2.0, 2.0, 2.0));
 
 	PlayerObject object3d = PlayerObject(Vector3d(0.0, 0.0, 0.0), 1);
 	object3d.setBoundingBox(cubeHitBox);
@@ -580,9 +580,9 @@ World::~World()
 void World::prepareWorld()
 {
 	//make objects here
-	camera = new Camera(Vector3d(0, 0, -10), 175, 1, 100);
+	camera = new Camera(Vector3d(0, -2, -10), 175, 1, 100);
 
-	worldObjects.push_back(std::make_unique<PlayerObject>(std::move(makePlayer(Vector3d(0, -2, 2)))));
+	worldObjects.push_back(std::make_unique<PlayerObject>(std::move(makePlayer(Vector3d(0, 0, 2)))));
 	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(4, 4, 10)))));
 	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 0, 5)))));
 	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(-10, -3, 2)))));
