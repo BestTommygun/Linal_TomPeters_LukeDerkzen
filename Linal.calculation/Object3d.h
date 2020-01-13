@@ -40,6 +40,7 @@ public:
 	Mesh& getMesh();
 	void setMesh(const Mesh& newMesh);
 	virtual const bool getIsPlayer() const;
+	virtual const bool getIsTarget() const;
 	virtual const bool getShouldDestroy() const;
 	virtual Object3d getPrefab();
 

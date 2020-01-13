@@ -15,5 +15,8 @@ int main(array<System::String ^> ^args)
     calculationThread->Start();
 
     System::Windows::Forms::Application::Run(mainView);
+
+    calculationThread->Abort();
+    calculationThread->Join();
     return 0;
 }

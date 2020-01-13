@@ -78,6 +78,9 @@
     <ClCompile Include="BoundingBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TargetObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Data\LineColours.h">
       <Filter>Header Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetObject.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -69,7 +69,7 @@ PlayerObject World::makePlayer(Vector3d position)
 	triangles.push_back(7);
 
 	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
-	BoundingBox cubeHitBox = BoundingBox(Vector3d(-3.0, -3.0, -3.0), Vector3d(3.0, 3.0, 3.0));
+	BoundingBox cubeHitBox = BoundingBox(Vector3d(-1.5, -1.5, -1.5), Vector3d(1.5, 1.5, 1.5));
 
 	PlayerObject object3d = PlayerObject(Vector3d(0.0, 0.0, 0.0), 1);
 	object3d.setBoundingBox(cubeHitBox);
@@ -79,7 +79,7 @@ PlayerObject World::makePlayer(Vector3d position)
 	return object3d;
 }
 
-Object3d World::makeTarget(Vector3d position)
+TargetObject World::makeTarget(Vector3d position)
 {
 	std::vector<Vector3d> vertexes = std::vector<Vector3d>();
 	vertexes.push_back(Vector3d(-1.0, -1.0, -1.0));
@@ -148,9 +148,9 @@ Object3d World::makeTarget(Vector3d position)
 	triangles.push_back(7);
 
 	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
-	BoundingBox cubeHitBox = BoundingBox(Vector3d(-3.0, -3.0, -3.0), Vector3d(3.0, 3.0, 3.0));
+	BoundingBox cubeHitBox = BoundingBox(Vector3d(-1.5, -1.5, -1.5), Vector3d(1.5, 1.5, 1.5));
 
-	Object3d object3d = Object3d(Vector3d(0.5, 0.5, 0.5));
+	TargetObject object3d = TargetObject(Vector3d(0.5, 0.5, 0.5));
 	object3d.setBoundingBox(cubeHitBox);
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
@@ -158,7 +158,7 @@ Object3d World::makeTarget(Vector3d position)
 	object3d.addBehaviour(std::make_unique<PulseBehaviour>(object3d, 2, 1, 0.01));
 	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::X, 0.3));
 	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Y, 1));
-	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Z, 0.3));
+	object3d.addBehaviour(std::make_unique<RotationBehaviour>(object3d, RotationDirection::Z, -0.3));
 	
 	return object3d;
 }
@@ -232,7 +232,7 @@ Object3d World::makeCube(Vector3d position)
 	triangles.push_back(7);
 
 	Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
-	BoundingBox cubeHitBox = BoundingBox(Vector3d(-3.0, -3.0, -3.0), Vector3d(3.0, 3.0, 3.0));
+	BoundingBox cubeHitBox = BoundingBox(Vector3d(-1.5, -1.5, -1.5), Vector3d(1.5, 1.5, 1.5));
 
 	Object3d object3d = Object3d(Vector3d(0.5, 0.5, 0.5));
 	object3d.setBoundingBox(cubeHitBox);
@@ -260,12 +260,12 @@ World::~World()
 void World::prepareWorld()
 {
 	//make objects here
-	camera = new Camera(Vector3d(0, 0, 0), 120, 1, 10000);
+	camera = new Camera(Vector3d(0, 0, 0), 175, 1, 100);
 
-	worldObjects.push_back(std::make_unique<PlayerObject>(std::move(makePlayer(Vector3d(0, 2, 10)))));
-	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 2, 10)))));
-	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 0, 5)))));
-	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(-10, -3, 2)))));
+	worldObjects.push_back(std::make_unique<PlayerObject>(std::move(makePlayer(Vector3d(0, -2, 2)))));
+	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(4, 4, 10)))));
+	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 0, 5)))));
+	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(-10, -3, 2)))));
 	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeTarget(Vector3d(-10, -10, 10)))));
 }
 

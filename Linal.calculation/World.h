@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Object3d.h"
 #include "PlayerObject.h"
+#include "TargetObject.h"
 #include "Behaviours/PulseBehaviour.h"
 #include "Behaviours/RotationBehaviour.h"
 
@@ -14,7 +15,7 @@ protected:
 
 	Object3d makeCube(Vector3d position);
 	PlayerObject makePlayer(Vector3d position);
-	Object3d makeTarget(Vector3d position);
+	TargetObject makeTarget(Vector3d position);
 public:
 	World();
 	~World();

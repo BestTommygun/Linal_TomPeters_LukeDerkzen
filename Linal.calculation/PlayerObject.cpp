@@ -135,7 +135,7 @@ Object3d PlayerObject::getPrefab()
 		triangles.push_back(7);
 
 		Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
-		BoundingBox cubeHitBox = BoundingBox(Vector3d(-2.0, -2.0, -3.0), Vector3d(2.0, 2.0, 2.0));
+		BoundingBox cubeHitBox = BoundingBox(Vector3d(-1.5, -1.5, -1.5), Vector3d(1.5, 1.5, 1.5));
 
 		bullet.setMesh(cubeMesh); 
 		bullet.setBoundingBox(cubeHitBox);

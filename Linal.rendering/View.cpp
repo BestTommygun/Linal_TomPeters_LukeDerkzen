@@ -9,17 +9,26 @@ void View::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 
 		e->Graphics->DrawLine(System::Drawing::Pens::Red, points->Item1, points->Item2);
 	}
+	System::Drawing::Font^ font = nullptr;
+	try {
+		font = gcnew System::Drawing::Font(gcnew System::String("Arial"), 14.0f);
+		if (HasLost) {
+			System::Drawing::SizeF stringSize = e->Graphics->MeasureString(gcnew System::String("The rebel scum won!"), font);
 
-	if (HasLost) {
-		System::Drawing::Rectangle loss = System::Drawing::Rectangle(System::Drawing::Point(this->Width / 3, this->Height / 2 - this->Height / 5), System::Drawing::Size(this->Width / 3, this->Height / 5));
-		e->Graphics->FillRectangle(gcnew System::Drawing::SolidBrush(System::Drawing::Color::DarkCyan), loss);
-		e->Graphics->DrawString(gcnew System::String("The rebel scum won!"), gcnew System::Drawing::Font(gcnew System::String("Arial"), 14.0f), gcnew System::Drawing::SolidBrush(System::Drawing::Color::Red), loss);
+			System::Drawing::RectangleF loss = System::Drawing::RectangleF(System::Drawing::PointF(this->Width / 2 - stringSize.Width / 2, this->Height / 2 - stringSize.Height / 2), stringSize);
+			e->Graphics->FillRectangle(gcnew System::Drawing::SolidBrush(System::Drawing::Color::DarkCyan), loss);
+			e->Graphics->DrawString(gcnew System::String("The rebel scum won!"), font, gcnew System::Drawing::SolidBrush(System::Drawing::Color::Red), loss);
+		}
+		else if (HasWon) {
+			System::Drawing::SizeF stringSize = e->Graphics->MeasureString(gcnew System::String("The empire reigns supreme!"), font);
+
+			System::Drawing::RectangleF win = System::Drawing::RectangleF(System::Drawing::Point(this->Width / 2 - stringSize.Width / 2, this->Height / 2 - stringSize.Height / 2), stringSize);
+			e->Graphics->FillRectangle(gcnew System::Drawing::SolidBrush(System::Drawing::Color::Gray), win);
+			e->Graphics->DrawString(gcnew System::String("The empire reigns supreme!"), font, gcnew System::Drawing::SolidBrush(System::Drawing::Color::Blue), win);
+		}
 	}
-	else if (HasWon) {
-		System::Drawing::Rectangle win = System::Drawing::Rectangle(System::Drawing::Point(this->Width / 3, this->Height / 2 - this->Height / 5), System::Drawing::Size(this->Width / 3, this->Height / 5));
-		e->Graphics->FillRectangle(gcnew System::Drawing::SolidBrush(System::Drawing::Color::Gray), win);
-		e->Graphics->DrawString(gcnew System::String("The empire reigns supreme!"), gcnew System::Drawing::Font(gcnew System::String("Arial"), 14.0f), gcnew System::Drawing::SolidBrush(System::Drawing::Color::Blue), win);
-
+	finally {
+		delete font;
 	}
 }
 

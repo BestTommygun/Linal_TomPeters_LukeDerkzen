@@ -140,6 +140,11 @@ const bool Object3d::getIsPlayer() const
 	return false;
 }
 
+const bool Object3d::getIsTarget() const
+{
+	return false;
+}
+
 const bool Object3d::getShouldDestroy() const
 {
 	return shouldDestroy;
@@ -165,10 +170,10 @@ void Object3d::setBoundingBox(BoundingBox newRoughHitbox)
 	delete boundingBox;
 	boundingBox = nullptr;
 	//calculate offset aswell
-	Vector3d point1 = Vector3d(newRoughHitbox.getPoints().first);
-	Vector3d point2 = Vector3d(newRoughHitbox.getPoints().first);
-	point1 *= this->getPosition().getPosition();
-	point2 *= this->getPosition().getPosition();
+	Vector3d point1 = newRoughHitbox.getPoints().first;
+	Vector3d point2 = newRoughHitbox.getPoints().second;
+	point1 += this->getPosition().getPosition();
+	point2 += this->getPosition().getPosition();
 	this->boundingBox = new BoundingBox(point1, point2);
 }
 
