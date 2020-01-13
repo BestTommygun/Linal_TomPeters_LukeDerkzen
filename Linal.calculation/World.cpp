@@ -4,58 +4,48 @@ PlayerObject World::makePlayer(Vector3d position)
 {
 	std::vector<Vector3d> vertexes = std::vector<Vector3d>();
 	vertexes.push_back(Vector3d(0, 0, 0));
-	vertexes.push_back(Vector3d(3.451090, 0.520436, 0.004318));
-	vertexes.push_back(Vector3d(-1.759147, - 0.500000, 0.500000));
-	vertexes.push_back(Vector3d(-1.759146, - 0.500000, - 0.500000));
-	vertexes.push_back(Vector3d(-1.759147, 0.500000, 0.500000));
-
-	vertexes.push_back(Vector3d(-1.759147, 0.500000, - 0.500000));
-	vertexes.push_back(Vector3d(-2.094380, - 0.500000, - 0.000000));
-	vertexes.push_back(Vector3d(-2.094380, 0.500000, - 0.000000));
-	vertexes.push_back(Vector3d(-2.094380, 0.000000, 0.500000));
-
-	vertexes.push_back(Vector3d(-2.094380, 0.000000, - 0.500000));
-	vertexes.push_back(Vector3d(-2.978710, 0.000000, - 0.000000));
-	vertexes.push_back(Vector3d(-0.468188, - 0.628495, - 0.628495));
-	vertexes.push_back(Vector3d(-0.468188, - 0.628495, 0.628495));
-
-	vertexes.push_back(Vector3d(-0.468187, 0.628495, - 0.628495));
-	vertexes.push_back(Vector3d(-0.468188, 0.628495, 0.628496));
-	vertexes.push_back(Vector3d(-0.481333, 0.628495, 0.000000));
-	vertexes.push_back(Vector3d(-0.481333, - 0.734441, - 0.000000));
-
-	vertexes.push_back(Vector3d(-0.481333, 0.000000, - 0.844413));
-	vertexes.push_back(Vector3d(-0.481333, 0.000000, 0.844413));
-	vertexes.push_back(Vector3d(0.024449, 0.633387, 0.000000));
-	vertexes.push_back(Vector3d(0.025334, - 0.633387, - 0.633387));
-
-	vertexes.push_back(Vector3d(0.025334, - 0.633387, 0.633387));
-	vertexes.push_back(Vector3d(0.025334, 0.633387, - 0.633386));
-	vertexes.push_back(Vector3d(0.025333, 0.633387, 0.633387));
-	vertexes.push_back(Vector3d(0.024449, - 0.739333, - 0.000000));
-
-	vertexes.push_back(Vector3d(0.024449, 0.000000, - 1.696315));
-	vertexes.push_back(Vector3d(0.024449, 0.000000, 1.696315));
-	vertexes.push_back(Vector3d(1.319742, 0.718534, 0.000000));
-	vertexes.push_back(Vector3d(1.320421, - 0.294940, - 0.506737));
-
-	vertexes.push_back(Vector3d(1.320421, - 0.294940, 0.506737));
-	vertexes.push_back(Vector3d(1.320422, 0.718534, - 0.506737));
-	vertexes.push_back(Vector3d(1.320421, 0.718534, 0.506737));
-	vertexes.push_back(Vector3d(1.319742, - 0.400886, 0.000000));
-
-	vertexes.push_back(Vector3d(1.319743, 0.211797, - 1.359128));
-	vertexes.push_back(Vector3d(1.319742, 0.211797, 1.359128));
-	vertexes.push_back(Vector3d(2.312777, 0.599662, 0.000000));
-	vertexes.push_back(Vector3d(2.313055, 0.148638, - 0.225512));
-
-	vertexes.push_back(Vector3d(2.313055, 0.148638, 0.225512));
-	vertexes.push_back(Vector3d(2.313055, 0.599662, - 0.225512));
-	vertexes.push_back(Vector3d(2.313054, 0.599662, 0.225512));
-	vertexes.push_back(Vector3d(2.312777, 0.042692, 0.000000));
-
-	vertexes.push_back(Vector3d(2.312777, 0.374150, - 0.606505));
-	vertexes.push_back(Vector3d(2.312777, 0.374150, 0.606506));
+	vertexes.push_back(Vector3d(-0.004318,-0.520436,-3.430470));
+	vertexes.push_back(Vector3d(-0.500000,0.500000,1.779767	 ));
+	vertexes.push_back(Vector3d(0.500000,0.500000,1.779766	 ));
+	vertexes.push_back(Vector3d(-0.500000,-0.500000,1.779767 ));
+	vertexes.push_back(Vector3d(0.500000,-0.500000,1.779766	 ));
+	vertexes.push_back(Vector3d(0.000000,0.500000,2.115000	 ));
+	vertexes.push_back(Vector3d(0.000000,-0.500000,2.115000	 ));
+	vertexes.push_back(Vector3d(-0.500000,0.000000,2.115000	 ));
+	vertexes.push_back(Vector3d(0.500000,-0.000000,2.115000	 ));
+	vertexes.push_back(Vector3d(0.000000,-0.000000,2.999330	 ));
+	vertexes.push_back(Vector3d(0.628495,0.628495,0.488807	 ));
+	vertexes.push_back(Vector3d(-0.628495,0.628495,0.488808	 ));
+	vertexes.push_back(Vector3d(0.628495,-0.628495,0.488807	 ));
+	vertexes.push_back(Vector3d(-0.628496,-0.628495,0.488808 ));
+	vertexes.push_back(Vector3d(-0.000000,-0.628495,0.501953 ));
+	vertexes.push_back(Vector3d(0.000000,0.734441,0.501953	 ));
+	vertexes.push_back(Vector3d(0.844413,-0.000000,0.501953	 ));
+	vertexes.push_back(Vector3d(-0.844413,0.000000,0.501953	 ));
+	vertexes.push_back(Vector3d(-0.000000,-0.633387,-0.003829));
+	vertexes.push_back(Vector3d(0.633387,0.633387,-0.004714	 ));
+	vertexes.push_back(Vector3d(-0.633387,0.633387,-0.004714 ));
+	vertexes.push_back(Vector3d(0.633386,-0.633387,-0.004714 ));
+	vertexes.push_back(Vector3d(-0.633387,-0.633387,-0.004713));
+	vertexes.push_back(Vector3d(-0.000000,0.739333,-0.003829 ));
+	vertexes.push_back(Vector3d(1.696315,-0.000000,-0.003829 ));
+	vertexes.push_back(Vector3d(-1.696316,0.000000,-0.003829 ));
+	vertexes.push_back(Vector3d(-0.000000,-0.718534,-1.299123));
+	vertexes.push_back(Vector3d(0.506737,0.294940,-1.299801	 ));
+	vertexes.push_back(Vector3d(-0.506737,0.294940,-1.299801 ));
+	vertexes.push_back(Vector3d(0.506737,-0.718534,-1.299802 ));
+	vertexes.push_back(Vector3d(-0.506737,-0.718534,-1.299801));
+	vertexes.push_back(Vector3d(-0.000000,0.400886,-1.299123 ));
+	vertexes.push_back(Vector3d(1.359127,-0.211797,-1.299123 ));
+	vertexes.push_back(Vector3d(-1.359128,-0.211797,-1.299123));
+	vertexes.push_back(Vector3d(-0.000000,-0.599662,-2.292157));
+	vertexes.push_back(Vector3d(0.225512,-0.148638,-2.292435 ));
+	vertexes.push_back(Vector3d(-0.225512,-0.148638,-2.292435));
+	vertexes.push_back(Vector3d(0.225512,-0.599662,-2.292435 ));
+	vertexes.push_back(Vector3d(-0.225512,-0.599662,-2.292434));
+	vertexes.push_back(Vector3d(-0.000000,-0.042692,-2.292157));
+	vertexes.push_back(Vector3d(0.606505,-0.374150,-2.292157 ));
+	vertexes.push_back(Vector3d(-0.606506,-0.374150,-2.292157));
 
 	std::vector<size_t> triangles = std::vector<size_t>();
 	//front side
@@ -403,8 +393,8 @@ PlayerObject World::makePlayer(Vector3d position)
 	object3d.move(position);
 
 	//original blender object is rotated so rotate it back
-	object3d.rotateAroundY((-90 / 360.0) * 2.0 * PI);
-	object3d.rotateAroundZ((180 / 360.0) * 2.0 * PI);
+	//object3d.rotateAroundY((-90 / 360.0) * 2.0 * PI);
+	//object3d.rotateAroundZ((180 / 360.0) * 2.0 * PI);
 
 	return object3d;
 }
