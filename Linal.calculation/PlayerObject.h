@@ -16,7 +16,7 @@ public:
 	PlayerObject& operator=(const PlayerObject& toCopy) noexcept;
 	PlayerObject& operator=(PlayerObject&& toMove) noexcept;
 
-	virtual Object3d getPrefab() override; //TODO: denk aan een andere naamgeving, naamgeving suggereerd volkomen andere functionaliteit
+	virtual Object3d getProjectilePrefab() override;
 
 	const bool getIsPlayer() const override;
 };

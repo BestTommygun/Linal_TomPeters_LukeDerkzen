@@ -150,7 +150,7 @@ const bool Object3d::getShouldDestroy() const
 	return shouldDestroy;
 }
 
-Object3d Object3d::getPrefab()
+Object3d Object3d::getProjectilePrefab()
 {
 	return Object3d(this->getPosition().getPosition());;
 }

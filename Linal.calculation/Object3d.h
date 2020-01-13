@@ -42,7 +42,7 @@ public:
 	virtual const bool getIsPlayer() const;
 	virtual const bool getIsTarget() const;
 	virtual const bool getShouldDestroy() const;
-	virtual Object3d getPrefab();
+	virtual Object3d getProjectilePrefab();
 
 	void setCoolDownTimer(const double newCoolDownTimer);
 	const double getCoolDowntimer() const;

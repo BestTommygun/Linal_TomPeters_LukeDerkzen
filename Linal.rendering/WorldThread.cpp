@@ -190,7 +190,7 @@ void WorldThread::handleInputs(System::Char input)
 		break;
 	case ' ':
 		if (world->getPlayerObject() != nullptr)
-			world->addWorldObject(std::move(world->getPlayerObject()->get()->getPrefab())); //TODO: shooting follows camera movement somehow
+			world->addWorldObject(std::move(world->getPlayerObject()->get()->getPrefab()));
 		break;
 	case 't':
 		std::cout << "this should enable debug mode which shows us the axis of everything\n";

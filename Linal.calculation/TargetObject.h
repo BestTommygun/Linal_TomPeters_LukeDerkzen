@@ -8,6 +8,11 @@ public:
 	TargetObject(const Vector3d& newPosition);
 	~TargetObject();
 
+	TargetObject(const TargetObject& toCopy) noexcept;
+	TargetObject(TargetObject&& toMove) noexcept;
+	TargetObject& operator=(const TargetObject& toCopy) noexcept;
+	TargetObject& operator=(TargetObject&& toMove) noexcept;
+
 	const bool getIsTarget() const override;
 };
 

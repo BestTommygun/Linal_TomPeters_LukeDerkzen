@@ -60,12 +60,12 @@ PlayerObject& PlayerObject::operator=(PlayerObject&& toMove) noexcept
 	return *this;
 }
 
-Object3d PlayerObject::getPrefab()
+Object3d PlayerObject::getProjectilePrefab()
 {
 	if (cooldownTimer <= 0) {
 		cooldownTimer = reloadSpeed;
 		Matrix3d bulletPosition = Matrix3d(this->getPosition());
-		bulletPosition = bulletPosition * Matrix3d(this->getPosition().getFrontDirection() * 5); //TODO: this somehow kills the player if though it has already far exceeded bounds
+		bulletPosition = bulletPosition * Matrix3d(this->getPosition().getFrontDirection() * 5);
 		Object3d bullet = Object3d(bulletPosition);
 
 		std::vector<Vector3d> vertexes = std::vector<Vector3d>();
