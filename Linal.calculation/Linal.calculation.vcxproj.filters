@@ -125,5 +125,8 @@
     <ClInclude Include="BoundingBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Data\LineColours.h">
+      <Filter>Header Files\data</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -169,6 +169,7 @@
     <ClInclude Include="Behaviours\RotationBehaviour.h" />
     <ClInclude Include="Behaviours\VelocityBehaviour.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Data\LineColours.h" />
     <ClInclude Include="Data\Matrix3d.h" />
     <ClInclude Include="Data\RotationDirection.h" />
     <ClInclude Include="Data\Vector2d.h" />

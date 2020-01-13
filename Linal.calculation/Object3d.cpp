@@ -164,7 +164,12 @@ void Object3d::setBoundingBox(BoundingBox newRoughHitbox)
 {
 	delete boundingBox;
 	boundingBox = nullptr;
-	this->boundingBox = new BoundingBox(newRoughHitbox);
+	//calculate offset aswell
+	Vector3d point1 = Vector3d(newRoughHitbox.getPoints().first);
+	Vector3d point2 = Vector3d(newRoughHitbox.getPoints().first);
+	point1 *= this->getPosition().getPosition();
+	point2 *= this->getPosition().getPosition();
+	this->boundingBox = new BoundingBox(point1, point2);
 }
 
 const BoundingBox& Object3d::getBoundingBox() const

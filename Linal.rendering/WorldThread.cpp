@@ -161,7 +161,7 @@ void WorldThread::handleInputs(System::Char input)
 		world->getPlayerObject()->get()->rotateAroundX(((5.0 / 360.0) * 2.0 * PI));
 		break;
 	case ' ':
-		world->setWorldObject(std::move(world->getPlayerObject()->get()->getPrefab())); //TODO: shooting follows camera movement somehow
+		world->addWorldObject(std::move(world->getPlayerObject()->get()->getPrefab())); //TODO: shooting follows camera movement somehow
 		break;
 	case 't':
 		std::cout << "this should enable debug mode which shows us the axis of everything\n";

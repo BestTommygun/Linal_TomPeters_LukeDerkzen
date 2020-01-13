@@ -65,7 +65,7 @@ Object3d PlayerObject::getPrefab()
 	if (cooldownTimer <= 0) {
 		cooldownTimer = reloadSpeed;
 		Matrix3d bulletPosition = Matrix3d(this->getPosition());
-		bulletPosition = bulletPosition * (this->getPosition().getFrontDirection() * 2);
+		bulletPosition = bulletPosition * Matrix3d(this->getPosition().getFrontDirection() * 5); //TODO: this somehow kills the player if though it has already far exceeded bounds
 		Object3d bullet = Object3d(bulletPosition);
 
 		std::vector<Vector3d> vertexes = std::vector<Vector3d>();
@@ -139,9 +139,8 @@ Object3d PlayerObject::getPrefab()
 
 		bullet.setMesh(cubeMesh); 
 		bullet.setBoundingBox(cubeHitBox);
-		bullet.addBehaviour(std::make_unique<RotationBehaviour>(bullet, RotationDirection::Z, 4));
-		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, 0.5));
-
+		//bullet.addBehaviour(std::make_unique<RotationBehaviour>(bullet, RotationDirection::Z, 4)); 
+		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, 0.5));//TODO: make speed dependent on parent
    		return bullet;
 	}
 	else {

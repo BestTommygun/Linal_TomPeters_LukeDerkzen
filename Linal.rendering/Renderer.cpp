@@ -9,10 +9,10 @@ Renderer::Renderer(Camera& camera) :
 System::Collections::Generic::List<RenderLine>^ Renderer::calculateFrame(const std::vector<std::unique_ptr<Object3d>>& toRenderObjects, double screenWidth, double screenHeight)
 {
 	//get the projection
-	Matrix3d camMatrix = this->camera.getMatrix();
-	Vector3d cameraTarget = camMatrix.getPosition() - camMatrix.getBackDirection();
-	Matrix3d lookAtMatrix = Matrix3d::createLookAt(camMatrix.getPosition(), cameraTarget, Vector3d::yAxis);
-	Matrix3d projectionMatrix = camera.getPerspectiveMatrix();
+	const Matrix3d& camMatrix = this->camera.getMatrix();
+	const Vector3d& cameraTarget = camMatrix.getPosition() - camMatrix.getBackDirection();
+	const Matrix3d& lookAtMatrix = Matrix3d::createLookAt(camMatrix.getPosition(), cameraTarget, Vector3d::yAxis);
+	const Matrix3d& projectionMatrix = camera.getPerspectiveMatrix();
 
 	const std::vector<std::unique_ptr<Object3d>>& worldObjectsCopy = toRenderObjects;
 	System::Collections::Generic::List<RenderLine>^ returnLines = gcnew System::Collections::Generic::List<RenderLine>();
@@ -50,19 +50,19 @@ System::Collections::Generic::List<RenderLine>^ Renderer::calculateFrame(const s
 		for (size_t triangleIndex = 0; triangleIndex < trianglesSize; triangleIndex += 3) {
 
 			//get all triangle points and convert them to lines
-			PointXYW point1 = points[curTriangle[triangleIndex]];
-			PointXYW point2	= points[curTriangle[triangleIndex + 1]];
-			PointXYW point3	= points[curTriangle[triangleIndex + 2]];
+			const PointXYW& point1 = points[curTriangle[triangleIndex]];
+			const PointXYW& point2	= points[curTriangle[triangleIndex + 1]];
+			const PointXYW& point3	= points[curTriangle[triangleIndex + 2]];
 			System::Drawing::PointF drawablePoint1 = System::Drawing::PointF(point1.x, point1.y);
 			System::Drawing::PointF drawablePoint2 = System::Drawing::PointF(point2.x, point2.y);
 			System::Drawing::PointF drawablePoint3 = System::Drawing::PointF(point3.x, point3.y);
 
 			if (point1.w > 0 && point2.w > 0) 
-				returnLines->Add(RenderLine(drawablePoint1, drawablePoint2));
+				returnLines->Add(RenderLine(drawablePoint1, drawablePoint2, LineColour::RED));
 			if (point2.w > 0 && point3.w > 0)
-				returnLines->Add(RenderLine(drawablePoint2, drawablePoint3));
+				returnLines->Add(RenderLine(drawablePoint2, drawablePoint3, LineColour::RED));
 			if(point1.w > 0 && point3.w > 0)
-				returnLines->Add(RenderLine(drawablePoint3, drawablePoint1));
+				returnLines->Add(RenderLine(drawablePoint3, drawablePoint1, LineColour::RED));
 		}
 
 	}

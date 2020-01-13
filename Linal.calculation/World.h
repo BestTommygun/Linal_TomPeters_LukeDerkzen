@@ -14,6 +14,7 @@ protected:
 
 	Object3d makeCube(Vector3d position);
 	PlayerObject makePlayer(Vector3d position);
+	Object3d makeTarget(Vector3d position);
 public:
 	World();
 	~World();
@@ -24,6 +25,6 @@ public:
 	Camera& getCamera() const;
 	std::unique_ptr<Object3d>* getPlayerObject();
 	std::vector<std::unique_ptr<Object3d>>& getWorldObjects();
-	void setWorldObject(Object3d& newObject);
+	void addWorldObject(Object3d& newObject);
 };
 
