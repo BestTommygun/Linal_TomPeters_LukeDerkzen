@@ -19,5 +19,6 @@ public:
 	virtual Object3d getProjectilePrefab() override;
 
 	const bool getIsPlayer() const override;
+	virtual void update(double deltaTime) override;
 };
 

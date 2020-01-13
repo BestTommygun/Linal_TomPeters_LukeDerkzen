@@ -61,12 +61,14 @@ void WorldThread::run() {
 	bool _isRunning = true;
 	mainView->HasLost = false;
 	mainView->HasWon = false;
-
-	System::TimeSpan deltaTime = System::TimeSpan::Zero;
+	System::DateTime prevTime = System::DateTime::UtcNow;
+	System::TimeSpan deltaTime = System::DateTime::UtcNow - prevTime;
 
 
 	while (_isRunning) {
 		try {
+			deltaTime = System::DateTime::UtcNow - prevTime;
+			prevTime = System::DateTime::UtcNow;
 			//handle inputs
 			if(mainView->KeysPressed->Count > 0)
 				handleInputs(mainView->KeysPressed->Dequeue());
@@ -91,7 +93,7 @@ void WorldThread::updateWorld(System::TimeSpan deltaTime)
 {
 	for (size_t i = 0; i < world->getWorldObjects().size(); i++) {
 		if (world->getWorldObjects()[i]->getShouldDestroy()) {
-			if (world->getWorldObjects().data()[i]->getIsPlayer()) {
+ 			if (world->getWorldObjects().data()[i]->getIsPlayer()) {
 				this->lose();
 			}
 			else if (world->getWorldObjects().data()[i]->getIsTarget()) {
@@ -100,7 +102,7 @@ void WorldThread::updateWorld(System::TimeSpan deltaTime)
 			world->getWorldObjects().erase(world->getWorldObjects().begin() + i);
 		}
 		else
-			world->getWorldObjects()[i]->update(deltaTime.TotalMilliseconds);
+			world->getWorldObjects()[i]->update(deltaTime.TotalSeconds);
 	}
 	checkCollisions();
 }
@@ -142,27 +144,27 @@ void WorldThread::handleInputs(System::Char input)
 		break;
 	case 'i':
 		if(world->getPlayerObject() != nullptr)
-			world->getPlayerObject()->get()->move(world->getPlayerObject()->get()->getPosition().getFrontDirection() * 0.1);
+			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getFrontDirection() * 0.1);
 		break;
 	case 'j':
 		if (world->getPlayerObject() != nullptr)
-			world->getPlayerObject()->get()->move(world->getPlayerObject()->get()->getPosition().getLeftDirection() * 0.1);
+			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getLeftDirection() * 0.1);
 		break;
 	case 'k':
 		if (world->getPlayerObject() != nullptr)
-			world->getPlayerObject()->get()->move(world->getPlayerObject()->get()->getPosition().getBackDirection() * 0.1);
+			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getBackDirection() * 0.1);
 		break;
 	case 'l':
 		if (world->getPlayerObject() != nullptr)
-			world->getPlayerObject()->get()->move(world->getPlayerObject()->get()->getPosition().getRightDirection() * 0.1);
+			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getRightDirection() * 0.1);
 		break;
 	case ',':
 		if (world->getPlayerObject() != nullptr)
-			world->getPlayerObject()->get()->move(world->getPlayerObject()->get()->getPosition().getDownDirection() * 0.1);
+			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getDownDirection() * 0.1);
 		break;
 	case '.':
 		if (world->getPlayerObject() != nullptr)
-			world->getPlayerObject()->get()->move(Matrix3d(world->getPlayerObject()->get()->getPosition().getUpDirection() * 0.1));
+			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getUpDirection() * 0.1);
 		break;
 	case 'u':
 		if (world->getPlayerObject() != nullptr)
@@ -190,7 +192,7 @@ void WorldThread::handleInputs(System::Char input)
 		break;
 	case ' ':
 		if (world->getPlayerObject() != nullptr)
-			world->addWorldObject(std::move(world->getPlayerObject()->get()->getPrefab()));
+			world->addWorldObject(std::move(world->getPlayerObject()->get()->getProjectilePrefab()));
 		break;
 	case 't':
 		std::cout << "this should enable debug mode which shows us the axis of everything\n";

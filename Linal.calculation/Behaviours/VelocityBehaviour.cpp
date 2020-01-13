@@ -27,7 +27,7 @@ VelocityBehaviour& VelocityBehaviour::operator=(VelocityBehaviour&& toMove) noex
 
 void VelocityBehaviour::Update(double deltatime)
 {
-	this->parent->move(this->parent->getPosition().getFrontDirection() * speed);
+	this->parent->setVelocity(this->parent->getPosition().getFrontDirection()* speed);
 }
 
 void VelocityBehaviour::setSpeed(const double newSpeed)

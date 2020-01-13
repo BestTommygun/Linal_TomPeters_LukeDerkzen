@@ -15,6 +15,7 @@ protected:
 	bool shouldDestroy;
 	double coolDowntimer;
 	std::vector<std::unique_ptr<BaseBehaviour>> behaviours;
+	Vector3d velocity;
 
 public:
 
@@ -49,9 +50,11 @@ public:
 	void setBoundingBox(BoundingBox newRoughHitbox);
 	const BoundingBox& getBoundingBox() const;
 	bool intersects(Vector3d point1, Vector3d point2);
+	const Vector3d& getVelocity();
+	void setVelocity(const Vector3d& newVelocity);
 
 	void addBehaviour(std::unique_ptr<BaseBehaviour> newBehaviour);
-	void update(double deltaTime);
+	virtual void update(double deltaTime);
 	void markForDestruction();
 };
 

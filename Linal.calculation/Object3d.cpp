@@ -8,6 +8,7 @@ Object3d::Object3d(const Object3d& toCopy) noexcept
 	this->shouldDestroy = toCopy.shouldDestroy;
 	this->coolDowntimer = toCopy.coolDowntimer;
 	this->boundingBox = new BoundingBox(*toCopy.boundingBox);
+	this->velocity = toCopy.velocity;
 }
 
 Object3d::Object3d(Object3d&& toMove) noexcept
@@ -20,6 +21,7 @@ Object3d::Object3d(Object3d&& toMove) noexcept
 	this->shouldDestroy = toMove.shouldDestroy;
 	this->boundingBox = toMove.boundingBox;
 	toMove.boundingBox = nullptr;
+	this->velocity = toMove.velocity;
 
 	size_t behavioursSize = this->behaviours.size();
 	for (size_t i = 0; i < behavioursSize; i++) {
@@ -32,7 +34,8 @@ Object3d::Object3d(const Vector3d& newPosition) :
 	mesh{ new Mesh() },
 	shouldDestroy{ false },
 	coolDowntimer{ 0.0 },
-	boundingBox{ nullptr }
+	boundingBox{ nullptr },
+	velocity{Vector3d(0, 0, 0)}
 { }
 
 Object3d::Object3d(const Matrix3d& newPosition) :
@@ -40,7 +43,8 @@ Object3d::Object3d(const Matrix3d& newPosition) :
 	mesh{ new Mesh() },
 	shouldDestroy{ false },
 	coolDowntimer{ 0.0 },
-	boundingBox{ nullptr }
+	boundingBox{ nullptr },
+	velocity{ Vector3d(0, 0, 0) }
 {
 }
 
@@ -63,6 +67,7 @@ Object3d& Object3d::operator=(const Object3d& toCopy) noexcept
 		this->coolDowntimer = toCopy.coolDowntimer;
 		this->shouldDestroy = toCopy.shouldDestroy;
 		this->boundingBox = new BoundingBox(*toCopy.boundingBox);
+		this->velocity = toCopy.velocity;
 
 	}
 	return *this;
@@ -80,6 +85,7 @@ Object3d& Object3d::operator=(Object3d&& toMove) noexcept
 		this->shouldDestroy = toMove.shouldDestroy;
 		this->boundingBox = toMove.boundingBox;
 		toMove.boundingBox = nullptr;
+		this->velocity = toMove.velocity;
 
 		size_t behavioursSize = this->behaviours.size();
 		for (size_t i = 0; i < behavioursSize; i++) {
@@ -189,6 +195,16 @@ bool Object3d::intersects(Vector3d point1, Vector3d point2)
 	return false;
 }
 
+const Vector3d& Object3d::getVelocity()
+{
+	return velocity;
+}
+
+void Object3d::setVelocity(const Vector3d& newVelocity)
+{
+	this->velocity = newVelocity;
+}
+
 void Object3d::addBehaviour(std::unique_ptr<BaseBehaviour> newBehaviour)
 {
 	behaviours.push_back(std::move(newBehaviour));
@@ -200,6 +216,8 @@ void Object3d::update(double deltaTime)
 	for (size_t i = 0; i < behavioursSize; i++) {
 		behaviours[i]->Update(deltaTime);
 	}
+	move(Matrix3d(velocity));
+	velocity = velocity * 0.9;
 }
 
 void Object3d::markForDestruction()

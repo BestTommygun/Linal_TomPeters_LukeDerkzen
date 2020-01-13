@@ -3,15 +3,57 @@
 PlayerObject World::makePlayer(Vector3d position) 
 {
 	std::vector<Vector3d> vertexes = std::vector<Vector3d>();
-	vertexes.push_back(Vector3d(-1.0, -1.0, -1.0));
-	vertexes.push_back(Vector3d(1.0, -1.0, -1.0));
-	vertexes.push_back(Vector3d(-1.0, 1.0, -1.0));
-	vertexes.push_back(Vector3d(1.0, 1.0, -1.0));
+	vertexes.push_back(Vector3d(3.451090, 0.520436, 0.004318));
+	vertexes.push_back(Vector3d(-1.759147, - 0.500000, 0.500000));
+	vertexes.push_back(Vector3d(-1.759146, - 0.500000, - 0.500000));
+	vertexes.push_back(Vector3d(-1.759147, 0.500000, 0.500000));
 
-	vertexes.push_back(Vector3d(-1.0, -1.0, 1.0));
-	vertexes.push_back(Vector3d(1.0, -1.0, 1.0));
-	vertexes.push_back(Vector3d(-1.0, 1.0, 1.0));
-	vertexes.push_back(Vector3d(1.0, 1.0, 1.0));
+	vertexes.push_back(Vector3d(-1.759147, 0.500000, - 0.500000));
+	vertexes.push_back(Vector3d(-2.094380, - 0.500000, - 0.000000));
+	vertexes.push_back(Vector3d(-2.094380, 0.500000, - 0.000000));
+	vertexes.push_back(Vector3d(-2.094380, 0.000000, 0.500000));
+
+	vertexes.push_back(Vector3d(-2.094380 0.000000 - 0.500000));
+	vertexes.push_back(Vector3d(-2.978710 0.000000 - 0.000000));
+	vertexes.push_back(Vector3d(-0.468188 - 0.628495 - 0.628495));
+	vertexes.push_back(Vector3d(-0.468188 - 0.628495 0.628495));
+
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+	vertexes.push_back(Vector3d());
+
+	vertexes.push_back(Vector3d());
 
 	std::vector<size_t> triangles = std::vector<size_t>();
 	//front side
@@ -266,7 +308,7 @@ void World::prepareWorld()
 	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(4, 4, 10)))));
 	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(0, 0, 5)))));
 	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(-10, -3, 2)))));
-	worldObjects.push_back(std::make_unique<Object3d>(std::move(makeTarget(Vector3d(-10, -10, 10)))));
+	worldObjects.push_back(std::make_unique<TargetObject>(std::move(makeTarget(Vector3d(-10, -10, 10)))));
 }
 
 void World::moveCamera(Vector3d movement)

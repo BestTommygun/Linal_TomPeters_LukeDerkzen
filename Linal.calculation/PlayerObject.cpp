@@ -62,8 +62,8 @@ PlayerObject& PlayerObject::operator=(PlayerObject&& toMove) noexcept
 
 Object3d PlayerObject::getProjectilePrefab()
 {
-	if (cooldownTimer <= 0) {
-		cooldownTimer = reloadSpeed;
+	if (this->cooldownTimer <= 0) {
+		this->cooldownTimer = reloadSpeed;
 		Matrix3d bulletPosition = Matrix3d(this->getPosition());
 		bulletPosition = bulletPosition * Matrix3d(this->getPosition().getFrontDirection() * 5);
 		Object3d bullet = Object3d(bulletPosition);
@@ -137,14 +137,13 @@ Object3d PlayerObject::getProjectilePrefab()
 		Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
 		BoundingBox cubeHitBox = BoundingBox(Vector3d(-1.5, -1.5, -1.5), Vector3d(1.5, 1.5, 1.5));
 
-		bullet.setMesh(cubeMesh); 
+		bullet.setMesh(cubeMesh);
 		bullet.setBoundingBox(cubeHitBox);
-		//bullet.addBehaviour(std::make_unique<RotationBehaviour>(bullet, RotationDirection::Z, 4)); 
+		bullet.addBehaviour(std::make_unique<RotationBehaviour>(bullet, RotationDirection::Z, 4)); 
 		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, 0.5));//TODO: make speed dependent on parent
    		return bullet;
 	}
 	else {
-		cooldownTimer -= 0.1;
 		Object3d returnObject = Object3d();
 		returnObject.markForDestruction();
 		return returnObject;
@@ -154,4 +153,15 @@ Object3d PlayerObject::getProjectilePrefab()
 const bool PlayerObject::getIsPlayer() const
 {
 	return true;
+}
+
+void PlayerObject::update(double deltaTime)
+{
+	size_t behavioursSize = this->behaviours.size();
+	for (size_t i = 0; i < behavioursSize; i++) {
+		behaviours[i]->Update(deltaTime);
+	}
+	this->cooldownTimer -= deltaTime;
+	move(Matrix3d(velocity));
+	velocity = velocity * 0.9;
 }
