@@ -65,82 +65,167 @@ Object3d PlayerObject::getProjectilePrefab()
 	if (this->cooldownTimer <= 0) {
 		this->cooldownTimer = reloadSpeed;
 		Matrix3d bulletPosition = Matrix3d(this->getPosition());
-		bulletPosition = bulletPosition * Matrix3d(this->getPosition().getFrontDirection() * 5);
+		bulletPosition = bulletPosition * Matrix3d(this->getPosition().getFrontDirection() * 7);
 		Object3d bullet = Object3d(bulletPosition);
 
 		std::vector<Vector3d> vertexes = std::vector<Vector3d>();
-		vertexes.push_back(Vector3d(-0.5, -0.5, -0.5));
-		vertexes.push_back(Vector3d(0.5, -0.5, -0.5));
-		vertexes.push_back(Vector3d(-0.5, 0.5, -0.5));
-		vertexes.push_back(Vector3d(0.5, 0.5, -0.5));
-
-		vertexes.push_back(Vector3d(-0.5, -0.5, 0.5));
-		vertexes.push_back(Vector3d(0.5, -0.5, 0.5));
-		vertexes.push_back(Vector3d(-0.5, 0.5, 0.5));
-		vertexes.push_back(Vector3d(0.5, 0.5, 0.5));
+		vertexes.push_back(Vector3d(0, 0, 0));
+		vertexes.push_back(Vector3d(0.186522,-0.186522,0.081164  ));
+		vertexes.push_back(Vector3d(0.186522,-0.186522,0.567348  ));
+		vertexes.push_back(Vector3d(-0.186522,-0.186522,0.567347 ));
+		vertexes.push_back(Vector3d(-0.186522,-0.186522,0.081164 ));
+		vertexes.push_back(Vector3d(0.186522,0.186522,0.081164	 ));
+		vertexes.push_back(Vector3d(0.186522,0.186522,0.567348	 ));
+		vertexes.push_back(Vector3d(-0.186522,0.186522,0.567347  ));
+		vertexes.push_back(Vector3d(-0.186522,0.186522,0.081164  ));
+		vertexes.push_back(Vector3d(0.000000,-0.250000,-0.117982 ));
+		vertexes.push_back(Vector3d(0.000000,-0.250000,0.572605  ));
+		vertexes.push_back(Vector3d(0.000000,0.250000,-0.117982  ));
+		vertexes.push_back(Vector3d(-0.000000,0.250000,0.572605  ));
+		vertexes.push_back(Vector3d(0.250000,0.000000,-0.117982  ));
+		vertexes.push_back(Vector3d(0.250000,0.000000,0.572605	 ));
+		vertexes.push_back(Vector3d(-0.250000,0.000000,0.572605  ));
+		vertexes.push_back(Vector3d(-0.250000,0.000000,-0.117982 ));
+		vertexes.push_back(Vector3d(0.000000,0.000000,-1.085191  ));
+		vertexes.push_back(Vector3d(-0.000000,0.000000,0.572605  ));
 
 		std::vector<size_t> triangles = std::vector<size_t>();
-		//front side
-		triangles.push_back(0);
-		triangles.push_back(1);
-		triangles.push_back(2);
 
-		triangles.push_back(1);
-		triangles.push_back(2);
-		triangles.push_back(3);
-
-		//left side
-		triangles.push_back(0);
+		triangles.push_back(10);
 		triangles.push_back(4);
-		triangles.push_back(2);
+		triangles.push_back(9);
+
+		triangles.push_back(8);
+		triangles.push_back(12);
+		triangles.push_back(11);
+
+		triangles.push_back(5);
+		triangles.push_back(14);
+		triangles.push_back(13);
+
+		triangles.push_back(18);
+		triangles.push_back(7);
+		triangles.push_back(15);
+
+		triangles.push_back(15);
+		triangles.push_back(8);
+		triangles.push_back(16);
+
+		triangles.push_back(9);
+		triangles.push_back(16);
+		triangles.push_back(17);
+
+		triangles.push_back(13);
+		triangles.push_back(9);
+		triangles.push_back(17);
+
+		triangles.push_back(6);
+		triangles.push_back(18);
+		triangles.push_back(14);
+
+		triangles.push_back(5);
+		triangles.push_back(12);
+		triangles.push_back(6);
+
+		triangles.push_back(1);
+		triangles.push_back(10);
+		triangles.push_back(9);
 
 		triangles.push_back(2);
-		triangles.push_back(6);
+		triangles.push_back(18);
+		triangles.push_back(10);
+
+		triangles.push_back(13);
+		triangles.push_back(11);
+		triangles.push_back(5);
+
+		triangles.push_back(11);
+		triangles.push_back(16);
+		triangles.push_back(8);
+
+		triangles.push_back(15);
+		triangles.push_back(4);
+		triangles.push_back(3);
+
+		triangles.push_back(18);
+		triangles.push_back(3);
+		triangles.push_back(10);
+
+		triangles.push_back(1);
+		triangles.push_back(14);
+		triangles.push_back(2);
+
+		triangles.push_back(10);
+		triangles.push_back(3);
 		triangles.push_back(4);
 
-		//top side
-		triangles.push_back(2);
-		triangles.push_back(3);
-		triangles.push_back(6);
+		triangles.push_back(8);
+		triangles.push_back(7);
+		triangles.push_back(12);
 
+		triangles.push_back(5);
 		triangles.push_back(6);
-		triangles.push_back(3);
+		triangles.push_back(14);
+
+		triangles.push_back(18);
+		triangles.push_back(12);
 		triangles.push_back(7);
 
-		//bottom side
-		triangles.push_back(0);
-		triangles.push_back(1);
-		triangles.push_back(4);
+		triangles.push_back(15);
+		triangles.push_back(7);
+		triangles.push_back(8);
 
-		triangles.push_back(1);
+		triangles.push_back(9);
 		triangles.push_back(4);
+		triangles.push_back(16);
+
+		triangles.push_back(13);
+		triangles.push_back(1);
+		triangles.push_back(9);
+
+		triangles.push_back(6);
+		triangles.push_back(12);
+		triangles.push_back(18);
+
 		triangles.push_back(5);
+		triangles.push_back(11);
+		triangles.push_back(12);
 
-		//right side
 		triangles.push_back(1);
+		triangles.push_back(2);
+		triangles.push_back(10);
+
+		triangles.push_back(2);
+		triangles.push_back(14);
+		triangles.push_back(18);
+
+		triangles.push_back(13);
+		triangles.push_back(17);
+		triangles.push_back(11);
+
+		triangles.push_back(11);
+		triangles.push_back(17);
+		triangles.push_back(16);
+
+		triangles.push_back(15);
+		triangles.push_back(16);
+		triangles.push_back(4);
+
+		triangles.push_back(18);
+		triangles.push_back(15);
 		triangles.push_back(3);
-		triangles.push_back(5);
 
 		triangles.push_back(1);
-		triangles.push_back(5);
-		triangles.push_back(7);
+		triangles.push_back(13);
+		triangles.push_back(14);
 
-		//back side
-		triangles.push_back(4);
-		triangles.push_back(5);
-		triangles.push_back(6);
-
-		triangles.push_back(5);
-		triangles.push_back(6);
-		triangles.push_back(7);
-
-		Mesh cubeMesh = Mesh(vertexes, triangles); //TODO: one of these triangles is wrong, see the render 
+		Mesh cubeMesh = Mesh(vertexes, triangles);
 		BoundingBox cubeHitBox = BoundingBox(Vector3d(-1.5, -1.5, -1.5), Vector3d(1.5, 1.5, 1.5));
 
 		bullet.setMesh(cubeMesh);
 		bullet.setBoundingBox(cubeHitBox);
 		bullet.addBehaviour(std::make_unique<RotationBehaviour>(bullet, RotationDirection::Z, 4)); 
-		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, 0.5));//TODO: make speed dependent on parent
+		bullet.addBehaviour(std::make_unique<VelocityBehaviour>(bullet, this->velocity.z + 0.5));//TODO: make speed dependent on parent
    		return bullet;
 	}
 	else {
