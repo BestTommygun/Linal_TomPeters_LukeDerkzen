@@ -136,12 +136,6 @@ void WorldThread::handleInputs(System::Char input)
 	case 'e':
 		world->getCamera().rotateAroundY(((1.0 / 360.0) * 2.0 * PI)); 
 		break;
-	case 'r':
-		world->getCamera().rotateAroundX(((-1.0 / 360.0) * 2.0 * PI));
-		break;
-	case 'f':
-		world->getCamera().rotateAroundX(((1.0 / 360.0) * 2.0 * PI));
-		break;
 	case 'i':
 		if(world->getPlayerObject() != nullptr)
 			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getFrontDirection() * 0.1);
@@ -160,11 +154,11 @@ void WorldThread::handleInputs(System::Char input)
 		break;
 	case ',':
 		if (world->getPlayerObject() != nullptr)
-			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getDownDirection() * 0.1);
+			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getUpDirection() * 0.1);
 		break;
 	case '.':
 		if (world->getPlayerObject() != nullptr)
-			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getUpDirection() * 0.1);
+			world->getPlayerObject()->get()->setVelocity(world->getPlayerObject()->get()->getPosition().getDownDirection() * 0.1);
 		break;
 	case 'u':
 		if (world->getPlayerObject() != nullptr)
