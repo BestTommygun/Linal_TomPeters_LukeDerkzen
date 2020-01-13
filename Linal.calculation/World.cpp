@@ -402,6 +402,10 @@ PlayerObject World::makePlayer(Vector3d position)
 	object3d.setMesh(cubeMesh);
 	object3d.move(position);
 
+	//original blender object is rotated so rotate it back
+	object3d.rotateAroundY((-90 / 360.0) * 2.0 * PI);
+	object3d.rotateAroundZ((180 / 360.0) * 2.0 * PI);
+
 	return object3d;
 }
 
@@ -586,7 +590,7 @@ World::~World()
 void World::prepareWorld()
 {
 	//make objects here
-	camera = new Camera(Vector3d(0, 0, 0), 175, 1, 100);
+	camera = new Camera(Vector3d(0, 0, -10), 175, 1, 100);
 
 	worldObjects.push_back(std::make_unique<PlayerObject>(std::move(makePlayer(Vector3d(0, -2, 2)))));
 	//worldObjects.push_back(std::make_unique<Object3d>(std::move(makeCube(Vector3d(4, 4, 10)))));
